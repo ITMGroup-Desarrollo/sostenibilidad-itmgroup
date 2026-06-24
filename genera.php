@@ -154,7 +154,6 @@ body {
 /* SECTION 2: FUNDACIÓN & GOBERNANZA */
 .genera-fundacion {
   padding: 100px 0;
-  background-color: var(--bg-light);
   position: relative;
 }
 
@@ -231,8 +230,104 @@ body {
   filter: drop-shadow(0 15px 30px rgba(12, 35, 64, 0.12));
 }
 
+/* SECTION 3: PILARES CARDS */
+.genera-pilares {
+  padding: 100px 0;
+  background-color: var(--text-light);
+  position: relative;
+}
+
+.genera-pilares-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.genera-pilar-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--text-light);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(12, 35, 64, 0.04);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
+  height: 100%;
+}
+
+.genera-pilar-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(12, 35, 64, 0.12);
+}
+
+.genera-pilar-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+}
+
+.genera-pilar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.genera-pilar-card:hover .genera-pilar-img {
+  transform: scale(1.05);
+}
+
+.genera-pilar-text-block {
+  padding: 40px 30%;
+  background-color: var(--darkblue);
+  color: var(--text-light);
+  transition: background-color 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.genera-pilar-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  line-height: 1.2;
+}
+
+.genera-pilar-card-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.90;
+}
+
+/* Hover color shifts for individual pillars */
+.pilar-prosperidad:hover .genera-pilar-text-block {
+  background-color: var(--accent-orange);
+}
+
+.pilar-desarrollo:hover .genera-pilar-text-block {
+  background-color: var(--accent-pink);
+}
+
+.pilar-oceano:hover .genera-pilar-text-block {
+  background-color: var(--accent-blue);
+}
+
 @media (max-width: 991px) {
-  .genera-fundacion {
+  .genera-pilares {
+    padding: 70px 0;
+  }
+  .genera-pilares-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+    .genera-fundacion {
     padding: 70px 0;
   }
   .genera-fundacion-grid {
@@ -243,10 +338,27 @@ body {
   .genera-fundacion-title {
     font-size: 2.5rem;
   }
-  .genera-fundacion-text.highlight {
-    padding-left: 15px;
+  .genera-pilar-text-block {
+  padding: 40px 30px;
+}
+}
+
+@media (max-width: 768px) {
+  .genera-pilares-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .genera-pilar-img-wrapper {
+    height: 260px;
+  }
+  .genera-pilar-card.pilar-desarrollo {
+    flex-direction: column;
+  }
+  .genera-pilar-card.pilar-desarrollo .genera-pilar-img-wrapper {
+    order: -1;
   }
 }
+
 </style>
 
 <div class="genera-container">
@@ -275,6 +387,47 @@ body {
             <div class="genera-fundacion-wheel-col">
                 <div class="genera-wheel-wrapper">
                     <img src="<?php echo $basePath; ?>gobernanza.png" alt="Gobernanza Portuaria" class="genera-fundacion-wheel-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: TARJETAS DE PILARES -->
+    <section class="genera-pilares">
+        <div class="genera-pilares-grid">
+            <!-- Pilar 1: Prosperidad Económica -->
+            <div class="genera-pilar-card pilar-prosperidad">
+                <div class="genera-pilar-img-wrapper">
+                    <!-- Placeholder: Beach cleaning / local community work. Replace src with your local image: <?php echo $basePath; ?>pilar-prosperidad.png -->
+                    <img class="genera-pilar-img" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=600&auto=format&fit=crop" alt="Prosperidad económica">
+                </div>
+                <div class="genera-pilar-text-block">
+                    <h3 class="genera-pilar-card-title">Prosperidad económica</h3>
+                    <p class="genera-pilar-card-description">Integramos talento local a la actividad turística para generar ingresos dignos y sostenibles.</p>
+                </div>
+            </div>
+
+            <!-- Pilar 2: Desarrollo Comunitario (Staggered Layout: Text on top, Image at bottom) -->
+            <div class="genera-pilar-card pilar-desarrollo">
+                <div class="genera-pilar-text-block">
+                    <h3 class="genera-pilar-card-title">Desarrollo comunitario</h3>
+                    <p class="genera-pilar-card-description">Fortalecemos el tejido social de la comunidad promoviendo la participación para lograr el bienestar colectivo.</p>
+                </div>
+                <div class="genera-pilar-img-wrapper">
+                    <!-- Placeholder: Woven artisan bags. Replace src with your local image: <?php echo $basePath; ?>pilar-comunidad.png -->
+                    <img class="genera-pilar-img" src="https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=600&auto=format&fit=crop" alt="Desarrollo comunitario">
+                </div>
+            </div>
+
+            <!-- Pilar 3: Protección del Océano -->
+            <div class="genera-pilar-card pilar-oceano">
+                <div class="genera-pilar-img-wrapper">
+                    <!-- Placeholder: Ocean scuba diving conservation. Replace src with your local image: <?php echo $basePath; ?>pilar-oceano.png -->
+                    <img class="genera-pilar-img" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=600&auto=format&fit=crop" alt="Protección del océano">
+                </div>
+                <div class="genera-pilar-text-block">
+                    <h3 class="genera-pilar-card-title">Protección del océano</h3>
+                    <p class="genera-pilar-card-description">Fomentamos la educación y participación local en las prácticas de conservación de los ecosistemas marinos y costeros.</p>
                 </div>
             </div>
         </div>
