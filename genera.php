@@ -42,10 +42,12 @@ if (function_exists('get_template_directory_uri')) {
 
 /* Reset and CSS Variables */
 :root {
+  --darkblue: #253d93;
   --primary-navy: #0c2340;
-  --accent-orange: #f47920;
-  --accent-pink: #d11270;
-  --accent-blue: #00a2e2;
+  --governance-purple: #5c2578;
+  --accent-orange: #ec882c;
+  --accent-pink: #d6006c;
+  --accent-blue: #1ba6d2;
   --bg-light: #f8f9fa;
   --text-dark: #1f2937;
   --text-muted: #6b7280;
@@ -148,6 +150,103 @@ body {
     padding: 0 10px;
   }
 }
+
+/* SECTION 2: FUNDACIÓN & GOBERNANZA */
+.genera-fundacion {
+  padding: 100px 0;
+  background-color: var(--bg-light);
+  position: relative;
+}
+
+.genera-fundacion-grid {
+  display: grid;
+  grid-template-columns: 1.10fr 0.90fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.genera-fundacion-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.genera-fundacion-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: var(--darkblue);
+  line-height: 1.15;
+  margin: 0 0 25px 0;
+  letter-spacing: -0.02em;
+}
+
+.genera-fundacion-text {
+  font-size: 1.1rem;
+  color: var(--darkblue);
+  line-height: 1.75;
+  margin: 0 0 20px 0;
+}
+
+.genera-fundacion-text:last-of-type {
+  margin-bottom: 0;
+}
+
+.genera-fundacion-text.highlight {
+  font-weight: 400;
+  color: var(--darkblue);
+  margin-top: 25px;
+}
+
+.genera-fundacion-text.highlight strong {
+  color: var(--darkblue);
+  font-weight: 700;
+}
+
+.genera-fundacion-wheel-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.genera-wheel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.genera-fundacion-wheel-img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 25px rgba(12, 35, 64, 0.08));
+  transition: var(--transition-smooth);
+}
+
+.genera-fundacion-wheel-img:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 15px 30px rgba(12, 35, 64, 0.12));
+}
+
+@media (max-width: 991px) {
+  .genera-fundacion {
+    padding: 70px 0;
+  }
+  .genera-fundacion-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    text-align: left;
+  }
+  .genera-fundacion-title {
+    font-size: 2.5rem;
+  }
+  .genera-fundacion-text.highlight {
+    padding-left: 15px;
+  }
+}
 </style>
 
 <div class="genera-container">
@@ -158,6 +257,26 @@ body {
                 <img class="genera-logo-img" src="<?php echo $basePath; ?>logo-Genera.png" alt="">
             </div>
             <p class="genera-hero-tagline">Impulsamos el desarrollo del turismo&nbsp;sostenible</p>
+        </div>
+    </section>
+
+    <!-- SECTION 2: FUNDACIÓN & GOBERNANZA -->
+    <section class="genera-fundacion">
+        <div class="genera-fundacion-grid">
+            <div class="genera-fundacion-info">
+                <h2 class="genera-fundacion-title">Fundación<br>Genera ITM</h2>
+                <p class="genera-fundacion-text">
+                    Somos una organización sin fines de lucro que impulsa el bienestar de las comunidades portuarias a través de programas basados en la gobernanza participativa, el turismo sostenible, la prosperidad local y el cuidado del entorno marino y costero.
+                </p>
+                <p class="genera-fundacion-text highlight">
+                    Nuestras acciones se rigen a través de 3 pilares fundamentales: <strong>Prosperidad económica, Desarrollo comunitario y Protección del océano.</strong>
+                </p>
+            </div>
+            <div class="genera-fundacion-wheel-col">
+                <div class="genera-wheel-wrapper">
+                    <img src="<?php echo $basePath; ?>gobernanza.png" alt="Gobernanza Portuaria" class="genera-fundacion-wheel-img">
+                </div>
+            </div>
         </div>
     </section>
 </div>
