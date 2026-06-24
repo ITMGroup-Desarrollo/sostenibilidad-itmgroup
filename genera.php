@@ -12,18 +12,29 @@ if (function_exists('get_template_directory_uri')) {
   Description: Plantilla personalizada para el portal Genera
 */
 
-// Detectar entorno
-if (function_exists('get_template_directory_uri')) {
-    $basePath = get_template_directory_uri() . '/assets/genera/';
-    get_header();
-} else {
-    $basePath = './';
-}
 // Detectar si el entorno es local (localhost, 127.0.0.1 o ::1)
 $is_local = in_array($_SERVER['SERVER_NAME'], ['localhost', '127.0.0.1', '::1']);
 
 // Forzar idioma inglés en entorno local
 $lang = $is_local ? 'en' : (function_exists('Lang\\getLang') ? Lang\getLang() : 'en');
+
+// Detectar entorno para cargar cabecera
+if (function_exists('get_template_directory_uri')) {
+    $basePath = get_template_directory_uri() . '/assets/genera/';
+    get_header();
+} else {
+    $basePath = './';
+    ?>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Genera</title>
+    </head>
+    <body>
+    <?php
+}
 ?>
 
 <style>
@@ -88,37 +99,13 @@ body {
 
 /* Logo Design */
 .genera-hero-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-bottom: 25px;
 }
 
-.genera-logo-svg {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 12px;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
-}
-
-.genera-logo-meta {
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 2px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.genera-logo-text {
-  font-size: 5.5rem;
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
-  color: var(--text-light);
-  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
-  margin-bottom: 20px;
+.genera-logo-img {
+  width: 26rem;
+  max-width: 90vw;
+  height: auto;
 }
 
 .genera-hero-tagline {
@@ -144,19 +131,21 @@ body {
 
 /* Responsiveness */
 @media (max-width: 768px) {
-  .genera-hero {
-    height: 70vh;
-    min-height: 450px;
+  .genera-hero-logo {
+    margin-bottom: 10px;
   }
-  .genera-logo-text {
-    font-size: 3.8rem;
+  .genera-hero {
+    height: 80vh;
+    min-height: 400px;
+  }
+  .genera-logo-img {
+    width: 18rem;
+    max-width: 85vw;
   }
   .genera-hero-tagline {
-    font-size: 1.35rem;
-  }
-  .genera-logo-svg {
-    width: 80px;
-    height: 80px;
+    font-size: 18px !important;
+    line-height: 1.4;
+    padding: 0 10px;
   }
 }
 </style>
@@ -166,9 +155,9 @@ body {
     <section class="genera-hero">
         <div class="genera-hero-content">
             <div class="genera-hero-logo">
-                <img src="<?php echo $basePath; ?>logo-Genera.png" alt="" style="width: 26rem;">
+                <img class="genera-logo-img" src="<?php echo $basePath; ?>logo-Genera.png" alt="">
             </div>
-            <p class="genera-hero-tagline">Impulsamos el desarrollo del turismo sostenible</p>
+            <p class="genera-hero-tagline">Impulsamos el desarrollo del turismo&nbsp;sostenible</p>
         </div>
     </section>
 </div>
@@ -178,9 +167,10 @@ if (function_exists('get_template_directory_uri')) {
     // Estamos en WordPress
     $basePath = get_template_directory_uri() . '/assets/perfiles/';
     get_footer();
+} else {
+    ?>
+    </body>
+    </html>
+    <?php
 }
-//  
 ?>
-
-
-</html>
