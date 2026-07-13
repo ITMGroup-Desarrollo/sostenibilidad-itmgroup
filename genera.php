@@ -923,6 +923,290 @@ body {
   }
 }
 
+/* SECTION 5: MODAL POPUP FOR PROGRAMS */
+.programa-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(12, 35, 64, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.programa-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.programa-modal-container {
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+  max-width: 1050px;
+  width: 90%;
+  max-height: 90vh;
+  position: relative;
+  transform: translateY(30px);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.programa-modal-overlay.active .programa-modal-container {
+  transform: translateY(0);
+}
+
+.programa-modal-box {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 28px;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Close Button */
+.modal-close-btn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: none;
+  border: none;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--darkblue);
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.6;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.modal-close-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Modal Content Tabs */
+.modal-tab-content {
+  display: none;
+  align-items: center;
+  gap: 40px;
+  height: 100%;
+}
+
+.modal-tab-content.active {
+  display: flex;
+}
+
+/* Left side: Gallery */
+.modal-gallery-wrapper {
+  width: 46%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-gallery {
+  width: 100%;
+  height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.modal-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 1;
+}
+
+.modal-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.modal-dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.modal-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #cbd5e1;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.modal-dot.active {
+  background-color: #0098cc;
+  transform: scale(1.2);
+}
+
+/* Right side: Details */
+.modal-details {
+  width: 54%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 300px;
+}
+
+.modal-details-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--darkblue);
+  line-height: 1.3;
+  margin: 0 0 20px 0;
+}
+
+.modal-details-text {
+  font-size: 1.02rem;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0 0 25px 0;
+}
+
+.modal-details-text strong {
+  color: var(--darkblue);
+  font-weight: 700;
+}
+
+.modal-details-logo {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  height: 48px;
+}
+
+.modal-details-logo svg {
+  height: 48px;
+  width: auto;
+  max-width: 100%;
+  display: block;
+}
+
+/* Right Column Sidebar */
+.programa-modal-sidebar {
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Sidebar mini cards dynamic styling wrapper */
+.sidebar-slot {
+  flex: 1;
+  width: 100%;
+  height: 95px;
+  display: flex;
+}
+
+.sidebar-slot .programa-card {
+  height: 100%;
+  border-radius: 18px;
+}
+
+.sidebar-slot .programa-card .programa-svg svg {
+  height: 2.8rem !important; /* Scale down SVG inside mini cards */
+}
+
+.sidebar-slot .programa-label {
+  display: none; /* Hide labels under sidebar mini cards */
+}
+
+/* Active card highlight on sidebar */
+.sidebar-slot[data-slot="active"] .programa-card {
+  box-shadow: 0 0 0 3px #0098cc, 0 10px 25px rgba(0, 152, 204, 0.2);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Responsive Rules for Modal */
+@media (max-width: 991px) {
+  .programa-modal-container {
+    flex-direction: column;
+    max-height: 95vh;
+    gap: 20px;
+    width: 92%;
+  }
+  .programa-modal-box {
+    padding: 30px;
+    border-radius: 24px;
+    overflow-y: auto;
+  }
+  .programa-modal-sidebar {
+    width: 100%;
+    flex-direction: row;
+    height: 90px;
+    gap: 15px;
+  }
+  .sidebar-slot {
+    height: 90px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-tab-content {
+    flex-direction: column;
+    gap: 25px;
+  }
+  .modal-gallery-wrapper {
+    width: 100%;
+  }
+  .modal-gallery {
+    height: 210px;
+  }
+  .modal-details {
+    width: 100%;
+    min-height: auto;
+  }
+  .modal-details-title {
+    font-size: 1.45rem;
+    margin-bottom: 12px;
+  }
+  .modal-details-text {
+    font-size: 0.98rem;
+    margin-bottom: 20px;
+  }
+  .modal-details-logo {
+    height: 40px;
+  }
+  .modal-details-logo svg {
+    height: 40px;
+  }
+  .programa-modal-sidebar {
+    height: 80px;
+    gap: 10px;
+  }
+  .sidebar-slot {
+    height: 80px;
+  }
+  .sidebar-slot .programa-card .programa-svg svg {
+    height: 2.2rem !important;
+  }
+}
+
 </style>
 
 <div class="genera-container">
@@ -1143,6 +1427,154 @@ body {
 
         // Select the first group (8 & 11) by default on load
         selectGroup('prosperidad');
+
+        // PROGRAMS MODAL INTERACTIVITY
+        const modal = document.getElementById('programaModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const mainProgramCards = document.querySelectorAll('.genera-programas .programa-card');
+        const tabContents = document.querySelectorAll('.modal-tab-content');
+        
+        const sidebarPrev = document.querySelector('.sidebar-slot[data-slot="previous"]');
+        const sidebarActive = document.querySelector('.sidebar-slot[data-slot="active"]');
+        const sidebarNext = document.querySelector('.sidebar-slot[data-slot="next"]');
+        
+        let currentProgramIndex = 0;
+        let galleryInterval = null;
+
+        function startAutoGallery(tabIndex) {
+            // Clear existing gallery interval
+            if (galleryInterval) {
+                clearInterval(galleryInterval);
+            }
+            
+            const activeTab = document.querySelector(`.modal-tab-content[data-program-index="${tabIndex}"]`);
+            if (!activeTab) return;
+            
+            const slides = activeTab.querySelectorAll('.modal-slide');
+            const dots = activeTab.querySelectorAll('.modal-dot');
+            if (slides.length <= 1) return;
+            
+            let currentSlide = 0;
+            
+            // Set up pagination dots click handlers
+            dots.forEach((dot, dotIdx) => {
+                dot.onclick = (e) => {
+                    e.stopPropagation();
+                    goToSlide(dotIdx);
+                };
+            });
+            
+            function goToSlide(slideIdx) {
+                slides.forEach(s => s.classList.remove('active'));
+                dots.forEach(d => d.classList.remove('active'));
+                
+                currentSlide = slideIdx;
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+            
+            // Auto advance slide every 4 seconds
+            galleryInterval = setInterval(() => {
+                let nextSlide = (currentSlide + 1) % slides.length;
+                goToSlide(nextSlide);
+            }, 4000);
+        }
+
+        function updateSidebar(index) {
+            const prevIndex = (index - 1 + 6) % 6;
+            const activeIndex = index;
+            const nextIndex = (index + 1) % 6;
+            
+            // Helper to populate a slot with a card clone
+            function populateSlot(slotElement, targetIndex) {
+                slotElement.innerHTML = '';
+                const cardClone = mainProgramCards[targetIndex].cloneNode(true);
+                
+                // Set click handler on clone
+                cardClone.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showProgram(targetIndex);
+                });
+                
+                slotElement.appendChild(cardClone);
+            }
+            
+            populateSlot(sidebarPrev, prevIndex);
+            populateSlot(sidebarActive, activeIndex);
+            populateSlot(sidebarNext, nextIndex);
+        }
+
+        function showProgram(index) {
+            currentProgramIndex = index;
+            
+            // Show correct content tab
+            tabContents.forEach(tab => {
+                if (parseInt(tab.dataset.programIndex) === index) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Reset active slides inside the active tab
+            const activeTab = document.querySelector(`.modal-tab-content[data-program-index="${index}"]`);
+            if (activeTab) {
+                const slides = activeTab.querySelectorAll('.modal-slide');
+                const dots = activeTab.querySelectorAll('.modal-dot');
+                slides.forEach((s, i) => {
+                    if (i === 0) s.classList.add('active');
+                    else s.classList.remove('active');
+                });
+                dots.forEach((d, i) => {
+                    if (i === 0) d.classList.add('active');
+                    else d.classList.remove('active');
+                });
+            }
+            
+            // Populate previous, active, next mini-cards on the right
+            updateSidebar(index);
+            
+            // Start slideshow timer
+            startAutoGallery(index);
+        }
+
+        function openModal(index) {
+            showProgram(index);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock scroll
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // Unlock scroll
+            if (galleryInterval) {
+                clearInterval(galleryInterval);
+            }
+        }
+
+        // Add click events to main page program cards
+        mainProgramCards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                openModal(index);
+            });
+        });
+
+        // Close button click
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Click outside modal box to close
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
     });
     </script>
 
@@ -1245,6 +1677,182 @@ body {
             </div>
         </div>
     </section>
+    <!-- PROGRAMS MODAL POPUP -->
+    <div class="programa-modal-overlay" id="programaModal">
+        <div class="programa-modal-container">
+            <!-- Left Panel: Main Box -->
+            <div class="programa-modal-box">
+                <button class="modal-close-btn" id="closeModal">&times;</button>
+
+                <!-- Program 1 Content Tab -->
+                <div class="modal-tab-content" data-program-index="0">
+                    <div class="modal-gallery-wrapper">
+                        <div class="modal-gallery">
+                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop');"></div>
+                        </div>
+                        <div class="modal-dots">
+                            <span class="modal-dot active" data-slide-index="0"></span>
+                            <span class="modal-dot" data-slide-index="1"></span>
+                            <span class="modal-dot" data-slide-index="2"></span>
+                        </div>
+                    </div>
+                    <div class="modal-details">
+                        <div>
+                            <h3 class="modal-details-title">Distintivo Puertos de Cruceros</h3>
+                            <p class="modal-details-text">
+                                Impulsamos la <strong>formación técnica y certificación en turismo de cruceros</strong> dirigida a personas de la comunidad local, para elevar la calidad de la atención a cruceristas, promover prácticas ambientales y generar empleo local remunerado y formal.
+                            </p>
+                        </div>
+                        <div class="modal-details-logo">
+                            <?php render_svg('logo.svg', '', 'programas/modal/distintivo-puertos'); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program 2 Content Tab -->
+                <div class="modal-tab-content" data-program-index="1">
+                    <div class="modal-gallery-wrapper">
+                        <div class="modal-gallery">
+                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1530521954074-e64f6810b32d?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1531206715517-5c0ba140e2b8?q=80&w=600&auto=format&fit=crop');"></div>
+                        </div>
+                        <div class="modal-dots">
+                            <span class="modal-dot active" data-slide-index="0"></span>
+                            <span class="modal-dot" data-slide-index="1"></span>
+                            <span class="modal-dot" data-slide-index="2"></span>
+                        </div>
+                    </div>
+                    <div class="modal-details">
+                        <div>
+                            <h3 class="modal-details-title">Puertos y comunidades circulares</h3>
+                            <p class="modal-details-text">
+                                Generamos acciones que impulsan la <strong>reducción de plásticos de un solo uso</strong> y promovemos una <strong>gestión responsable de residuos</strong> en territorios portuarios, con el objetivo de proteger el océano.
+                            </p>
+                        </div>
+                        <div class="modal-details-logo">
+                            <?php render_svg('logo.svg', '', 'programas/modal/puertos-comunidades'); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program 3 Content Tab -->
+                <div class="modal-tab-content" data-program-index="2">
+                    <div class="modal-gallery-wrapper">
+                        <div class="modal-gallery">
+                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1509281373149-e957c6296406?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=600&auto=format&fit=crop');"></div>
+                        </div>
+                        <div class="modal-dots">
+                            <span class="modal-dot active" data-slide-index="0"></span>
+                            <span class="modal-dot" data-slide-index="1"></span>
+                            <span class="modal-dot" data-slide-index="2"></span>
+                        </div>
+                    </div>
+                    <div class="modal-details">
+                        <div>
+                            <h3 class="modal-details-title">Amora</h3>
+                            <p class="modal-details-text">
+                                Promovemos el <strong>desarrollo económico, capacitación, acompañamiento y promoción</strong> de personas artesanas en lo local bajo un modelo de <strong>comercio justo y reinversión social</strong>.
+                            </p>
+                        </div>
+                        <div class="modal-details-logo">
+                            <?php render_svg('logo.svg', '', 'programas/modal/amora'); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program 4 Content Tab -->
+                <div class="modal-tab-content" data-program-index="3">
+                    <div class="modal-gallery-wrapper">
+                        <div class="modal-gallery">
+                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop');"></div>
+                        </div>
+                        <div class="modal-dots">
+                            <span class="modal-dot active" data-slide-index="0"></span>
+                            <span class="modal-dot" data-slide-index="1"></span>
+                            <span class="modal-dot" data-slide-index="2"></span>
+                        </div>
+                    </div>
+                    <div class="modal-details">
+                        <div>
+                            <h3 class="modal-details-title">Comité Local de Gobernanza para el Turismo Sostenible en Samaná</h3>
+                            <p class="modal-details-text">
+                                Fortalecemos la <strong>gobernanza portuaria</strong> al articular el diálogo entre actores locales para impulsar decisiones conjuntas que favorezcan la <strong>prosperidad económica, la protección del océano y el desarrollo comunitario</strong> en Samaná.
+                            </p>
+                        </div>
+                        <div class="modal-details-logo">
+                            <?php render_svg('logo.svg', '', 'programas/modal/comite-local'); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program 5 Content Tab -->
+                <div class="modal-tab-content" data-program-index="4">
+                    <div class="modal-gallery-wrapper">
+                        <div class="modal-gallery">
+                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop');"></div>
+                        </div>
+                        <div class="modal-dots">
+                            <span class="modal-dot active" data-slide-index="0"></span>
+                            <span class="modal-dot" data-slide-index="1"></span>
+                            <span class="modal-dot" data-slide-index="2"></span>
+                        </div>
+                    </div>
+                    <div class="modal-details">
+                        <div>
+                            <h3 class="modal-details-title">Centros Comunitarios</h3>
+                            <p class="modal-details-text">
+                                Impulsamos el <strong>desarrollo comunitario</strong> en zonas portuarias a través de espacios de <strong>educación, cultura y emprendimiento sostenible</strong> que fortalecen el bienestar y la prosperidad compartida.
+                            </p>
+                        </div>
+                        <div class="modal-details-logo">
+                            <?php render_svg('logo.svg', '', 'programas/modal/centros-comunitarios'); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program 6 Content Tab -->
+                <div class="modal-tab-content" data-program-index="5">
+                    <div class="modal-gallery-wrapper">
+                        <div class="modal-gallery">
+                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1534008757030-27299c4371b6?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?q=80&w=600&auto=format&fit=crop');"></div>
+                        </div>
+                        <div class="modal-dots">
+                            <span class="modal-dot active" data-slide-index="0"></span>
+                            <span class="modal-dot" data-slide-index="1"></span>
+                            <span class="modal-dot" data-slide-index="2"></span>
+                        </div>
+                    </div>
+                    <div class="modal-details">
+                        <div>
+                            <h3 class="modal-details-title">Tours Comunitarios</h3>
+                            <p class="modal-details-text">
+                                Desarrollamos e impulsamos <strong>tours comunitarios sostenibles</strong> que conectan a los visitantes con la <strong>riqueza cultural, natural e histórica local</strong>, generando beneficios económicos directos para las familias anfitrionas.
+                            </p>
+                        </div>
+                        <!-- Logo is empty for Card 6 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Sidebar stack of 3 slots -->
+            <div class="programa-modal-sidebar">
+                <div class="sidebar-slot" data-slot="previous"></div>
+                <div class="sidebar-slot" data-slot="active"></div>
+                <div class="sidebar-slot" data-slot="next"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php
