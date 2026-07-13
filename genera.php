@@ -37,8 +37,8 @@ if (function_exists('get_template_directory_uri')) {
 }
 
 if (!function_exists('render_svg')) {
-    function render_svg($filename, $class = '') {
-        $filepath = __DIR__ . '/objetivos/' . $filename;
+    function render_svg($filename, $class = '', $folder = 'objetivos') {
+        $filepath = __DIR__ . '/' . $folder . '/' . $filename;
         if (file_exists($filepath)) {
             $svg = file_get_contents($filepath);
             if ($class) {
@@ -700,6 +700,225 @@ body {
   }
 }
 
+/* SECTION 5: PROGRAMAS EMBLEMA */
+.genera-programas {
+  padding: 100px 0;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.genera-programas-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.genera-programas-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--darkblue);
+  line-height: 1.25;
+  text-align: center;
+  margin: 0 0 60px 0;
+  letter-spacing: -0.015em;
+}
+
+.programas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 70px;
+}
+
+.programa-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.programa-card {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(12, 35, 64, 0.04);
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.programa-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  z-index: 1;
+}
+
+.programa-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(12, 35, 64, 0.82) 0%, rgba(37, 61, 147, 0.65) 100%);
+  z-index: 2;
+  transition: background 0.4s ease;
+}
+
+.programa-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: auto;
+  height: 62px;
+  max-width: 80%;
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Make SVG path fill white by default inside card */
+.programa-svg path {
+  fill: #ffffff !important;
+  transition: fill 0.4s ease;
+}
+
+.programa-label {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--darkblue);
+  text-align: center;
+  line-height: 1.35;
+  margin: 20px 0 0 0;
+  max-width: 90%;
+}
+
+/* Card Hover Interactions */
+.programa-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(12, 35, 64, 0.15);
+}
+
+.programa-card:hover .programa-card-bg {
+  transform: scale(1.08);
+}
+
+.programa-card:hover .programa-svg {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.programa-card:hover .programa-svg path {
+  fill: #0098cc !important;
+}
+
+/* Cancun Center Footer Branding Block */
+.programas-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+  padding-top: 50px;
+  border-top: 1px solid rgba(12, 35, 64, 0.05);
+  text-align: center;
+}
+
+.cancun-center-logo {
+  height: 70px;
+  width: auto;
+  margin-bottom: 30px;
+}
+
+
+
+.programas-footer-text {
+  font-size: 1.05rem;
+  color: var(--darkblue);
+  line-height: 1.6;
+  max-width: 820px;
+  margin: 0 0 30px 0;
+}
+
+.instagram-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.instagram-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--darkblue);
+  transition: color 0.3s ease;
+}
+
+.instagram-icon {
+  width: 22px;
+  height: 22px;
+  fill: var(--darkblue);
+  transition: fill 0.3s ease;
+}
+
+.instagram-handle {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.instagram-link:hover {
+  color: #0098cc;
+}
+
+.instagram-link:hover .instagram-icon {
+  fill: #0098cc;
+}
+
+.instagram-subtext {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* Responsive Rules for Programas */
+@media (max-width: 991px) {
+  .programas-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  .genera-programas-title {
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .programas-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .programa-card {
+    height: 210px;
+  }
+  .genera-programas {
+    padding: 70px 0;
+  }
+  .genera-programas-title {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+  }
+  .programas-footer-text {
+    font-size: 0.98rem;
+    padding: 0 15px;
+  }
+}
+
 </style>
 
 <div class="genera-container">
@@ -922,6 +1141,106 @@ body {
         selectGroup('prosperidad');
     });
     </script>
+
+    <!-- SECTION 5: PROGRAMAS EMBLEMA -->
+    <section class="genera-programas">
+        <div class="genera-programas-wrapper">
+            <h2 class="genera-programas-title">Conoce nuestros programas emblema</h2>
+            
+            <div class="programas-grid">
+                <!-- Card 1: Distintivo Puertos de Cruceros -->
+                <div class="programa-card-wrapper">
+                    <div class="programa-card">
+                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-overlay"></div>
+                        <div class="programa-svg">
+                            <?php render_svg('distintivo-puertos-cruceros.svg', '', 'programas'); ?>
+                        </div>
+                    </div>
+                    <p class="programa-label">Distintivo Puertos de Cruceros</p>
+                </div>
+
+                <!-- Card 2: Puertos y Comunidades circulares -->
+                <div class="programa-card-wrapper">
+                    <div class="programa-card">
+                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1530521954074-e64f6810b32d?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-overlay"></div>
+                        <div class="programa-svg">
+                            <?php render_svg('puertos-comunidades-circulares.svg', '', 'programas'); ?>
+                        </div>
+                    </div>
+                    <p class="programa-label">Puertos y Comunidades circulares</p>
+                </div>
+
+                <!-- Card 3: Amora -->
+                <div class="programa-card-wrapper">
+                    <div class="programa-card">
+                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-overlay"></div>
+                        <div class="programa-svg">
+                            <?php render_svg('amora.svg', '', 'programas'); ?>
+                        </div>
+                    </div>
+                    <p class="programa-label">Amora</p>
+                </div>
+
+                <!-- Card 4: Comité Local de Gobernanza -->
+                <div class="programa-card-wrapper">
+                    <div class="programa-card">
+                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-overlay"></div>
+                        <div class="programa-svg">
+                            <?php render_svg('comite-gobernanza-samana.svg', '', 'programas'); ?>
+                        </div>
+                    </div>
+                    <p class="programa-label">Comité Local de Gobernanza para el Turismo Sostenible en Samaná</p>
+                </div>
+
+                <!-- Card 5: Centros Comunitarios -->
+                <div class="programa-card-wrapper">
+                    <div class="programa-card">
+                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-overlay"></div>
+                        <div class="programa-svg">
+                            <?php render_svg('centros-comunitarios-wayak.svg', '', 'programas'); ?>
+                        </div>
+                    </div>
+                    <p class="programa-label">Centros Comunitarios</p>
+                </div>
+
+                <!-- Card 6: Tours Comunitarios -->
+                <div class="programa-card-wrapper">
+                    <div class="programa-card">
+                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-overlay"></div>
+                        <div class="programa-svg">
+                            <?php render_svg('tours-comunitarios.svg', '', 'programas'); ?>
+                        </div>
+                    </div>
+                    <p class="programa-label">Tours Comunitarios</p>
+                </div>
+            </div>
+
+            <!-- Footer: Cancun Center Logo & Text -->
+            <div class="programas-footer">
+                <div class="cancun-center-logo">
+                    <?php render_svg('logo-fundacion-cancun-center.svg', '', 'programas'); ?>
+                </div>
+                <p class="programas-footer-text">
+                    A través de Fundación Cancún Center, gestionamos alianzas con cada evento realizado en el Centro de Convenciones Cancún Center para impulsar proyectos comunitarios y ambientales en Quintana Roo.
+                </p>
+                <div class="instagram-block">
+                    <a href="https://www.instagram.com/fundacioncancuncenter/" target="_blank" rel="noopener noreferrer" class="instagram-link">
+                        <svg class="instagram-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051C.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                        </svg>
+                        <span class="instagram-handle">@fundacioncancuncenter</span>
+                    </a>
+                    <span class="programas-footer-text">Conoce más y síguenos en redes</span>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <?php
