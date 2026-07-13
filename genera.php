@@ -829,7 +829,6 @@ body {
   align-items: center;
   margin-top: 80px;
   padding-top: 50px;
-  border-top: 1px solid rgba(12, 35, 64, 0.05);
   text-align: center;
 }
 
