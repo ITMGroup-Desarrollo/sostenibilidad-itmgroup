@@ -965,7 +965,6 @@ body {
 .programa-modal-box {
   flex: 1;
   background-color: #ffffff;
-  border-radius: 28px;
   padding: 40px;
   position: relative;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
@@ -977,8 +976,8 @@ body {
 /* Close Button */
 .modal-close-btn {
   position: absolute;
-  top: 25px;
-  right: 25px;
+  top: 5px;
+  right: 5px;
   background: none;
   border: none;
   font-size: 2.2rem;
@@ -1152,7 +1151,6 @@ body {
   }
   .programa-modal-box {
     padding: 30px;
-    border-radius: 24px;
     overflow-y: auto;
   }
   .programa-modal-sidebar {
