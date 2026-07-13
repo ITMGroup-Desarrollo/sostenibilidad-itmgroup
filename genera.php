@@ -777,10 +777,15 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
-  width: auto;
-  height: 62px;
-  max-width: 80%;
   transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.programa-svg svg {
+  display: block;
+  width: auto;
+  height: 7rem !important;
+  max-width: 80%;
+  margin: 0 auto;
 }
 
 /* Make SVG path fill white by default inside card */
