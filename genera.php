@@ -35,6 +35,21 @@ if (function_exists('get_template_directory_uri')) {
     <body>
     <?php
 }
+
+if (!function_exists('render_svg')) {
+    function render_svg($filename, $class = '') {
+        $filepath = __DIR__ . '/objetivos/' . $filename;
+        if (file_exists($filepath)) {
+            $svg = file_get_contents($filepath);
+            if ($class) {
+                $svg = str_replace('<svg ', '<svg class="' . htmlspecialchars($class) . '" ', $svg);
+            }
+            echo $svg;
+        } else {
+            echo '<!-- SVG not found: ' . htmlspecialchars($filename) . ' -->';
+        }
+    }
+}
 ?>
 
 <style>
@@ -301,7 +316,7 @@ body {
 
 .genera-pilar-card-description {
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.2;
   margin: 0;
   opacity: 0.90;
 }
@@ -358,6 +373,326 @@ body {
     order: -1;
   }
 }
+
+/* SECTION 4: OBJETIVOS ODS */
+.genera-objetivos {
+  padding: 100px 0;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.genera-objetivos-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.genera-objetivos-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--darkblue);
+  line-height: 1.3;
+  margin: 0 0 50px 0;
+  max-width: 900px;
+  letter-spacing: -0.01em;
+}
+
+.genera-objetivos-grid {
+  display: grid;
+  grid-template-columns: 2.1fr 0.9fr;
+  gap: 50px;
+  align-items: start;
+}
+
+/* ODS Cards Grid */
+.ods-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.ods-card {
+  background-color: var(--text-light);
+  border-radius: 20px;
+  padding: 35px 25px;
+  box-shadow: 0 10px 30px rgba(12, 35, 64, 0.03);
+  border: 1px solid rgba(12, 35, 64, 0.04);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s ease;
+  min-height: 220px;
+  user-select: none;
+}
+
+.ods-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(12, 35, 64, 0.08);
+  border-color: rgba(12, 35, 64, 0.08);
+}
+
+.ods-card-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  width: 100%;
+  margin-bottom: 25px;
+  justify-items: center;
+  align-items: center;
+}
+
+.ods-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.ods-svg-icon {
+  width: 100%;
+  max-width: 130px;
+  height: auto;
+  transition: filter 0.3s ease;
+}
+
+/* Bottom Lines */
+.ods-card-line {
+  height: 4px;
+  width: 100%;
+  background-color: #e2e8f0;
+  border-radius: 2px;
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  width: calc(100% - 50px);
+  transition: background-color 0.35s ease;
+}
+
+/* Triple Line for card 4 */
+.ods-card-line.line-triple {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background-color: transparent;
+}
+
+.line-segment {
+  height: 4px;
+  background-color: #e2e8f0;
+  border-radius: 2px;
+  transition: background-color 0.35s ease;
+}
+
+/* Inactive states */
+.ods-card.inactive {
+  opacity: 0.85;
+}
+
+.ods-card.inactive .ods-svg-icon {
+  filter: grayscale(100%) opacity(0.28);
+}
+
+.ods-card.inactive .ods-card-line:not(.line-triple) {
+  background-color: #e2e8f0;
+}
+
+.ods-card.inactive .line-segment {
+  background-color: #e2e8f0;
+}
+
+/* Active states & Colors */
+.ods-card.active {
+  border-color: rgba(37, 61, 147, 0.1);
+  box-shadow: 0 15px 35px rgba(37, 61, 147, 0.08);
+}
+
+/* Active bottom lines */
+.ods-card.active .line-prosperidad { background-color: var(--accent-orange); }
+.ods-card.active .line-comunitario { background-color: var(--accent-pink); }
+.ods-card.active .line-oceano { background-color: var(--accent-blue); }
+
+/* Card 4 active segments */
+.ods-card.active .segment-prosperidad { background-color: var(--accent-orange); }
+.ods-card.active .segment-comunitario { background-color: var(--accent-pink); }
+.ods-card.active .segment-oceano { background-color: var(--accent-blue); }
+
+/* Active ODS SVGs color mappings (when active, override default grey/color fills) */
+.ods-card.active .icon-8 path:not([fill="none"]) { fill: #C12033 !important; }
+.ods-card.active .icon-11 path:not([fill="none"]) { fill: #F89C25 !important; }
+.ods-card.active .icon-5 path:not([fill="none"]) { fill: #FF3A21 !important; }
+.ods-card.active .icon-10 path:not([fill="none"]) { fill: #DD1367 !important; }
+.ods-card.active .icon-12 path:not([fill="none"]) { fill: #BF8D2C !important; }
+.ods-card.active .icon-14 path:not([fill="none"]) { fill: #1F97D4 !important; }
+.ods-card.active .icon-16 path:not([fill="none"]) { fill: #136A9F !important; }
+.ods-card.active .icon-17 path:not([fill="none"]) { fill: #14496B !important; }
+
+/* Right Column: Pillars Column */
+.pillars-col {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+  height: 100%;
+}
+
+.pillar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 140px;
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+.pillar-item:hover {
+  transform: scale(1.05);
+}
+
+.pillar-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.pillar-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #94a3b8;
+  line-height: 1.3;
+  transition: color 0.4s ease;
+}
+
+/* Active states for pillars */
+.pillar-item.active .pillar-label {
+  color: var(--darkblue);
+}
+
+/* Active circular background and drop shadows */
+.pillar-item.active[data-pillar="prosperidad"] .pillar-circle {
+  background-color: var(--accent-orange);
+  box-shadow: 0 10px 20px rgba(236, 136, 44, 0.25);
+}
+.pillar-item.active[data-pillar="comunitario"] .pillar-circle {
+  background-color: var(--accent-pink);
+  box-shadow: 0 10px 20px rgba(214, 0, 108, 0.25);
+}
+.pillar-item.active[data-pillar="oceano"] .pillar-circle {
+  background-color: var(--accent-blue);
+  box-shadow: 0 10px 20px rgba(27, 166, 210, 0.25);
+}
+
+/* Adjust SVG inside pillar-circle */
+.svg-pillar {
+  width: 80px;
+  height: 80px;
+}
+.svg-pillar path {
+  transition: fill 0.4s ease;
+}
+
+/* Control the background circle path in SVGs */
+.pillar-item:not(.active) .svg-pillar path:first-of-type {
+  fill: #AAAAAA !important;
+}
+.pillar-item.active[data-pillar="prosperidad"] .svg-pillar path:first-of-type {
+  fill: var(--accent-orange) !important;
+}
+.pillar-item.active[data-pillar="comunitario"] .svg-pillar path:first-of-type {
+  fill: var(--accent-pink) !important;
+}
+.pillar-item.active[data-pillar="oceano"] .svg-pillar path:first-of-type {
+  fill: var(--accent-blue) !important;
+}
+
+/* Bottom Logo Footer */
+.ods-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+  padding-top: 20px;
+}
+
+.ods-footer-logo {
+  height: 55px;
+  width: auto;
+  max-width: 100%;
+  opacity: 0.95;
+}
+
+/* Responsiveness for new section */
+@media (max-width: 991px) {
+  .genera-objetivos-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .pillars-col {
+    flex-direction: row;
+    justify-content: space-around;
+    padding-left: 0;
+  }
+  .genera-objetivos {
+    padding: 70px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .ods-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .ods-card {
+    min-height: auto;
+    padding: 25px;
+  }
+  .ods-card-line {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 15px;
+  }
+  .ods-card-line.line-triple {
+    width: 100%;
+  }
+  .ods-card-content {
+    margin-bottom: 10px;
+  }
+  .pillars-col {
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+  .pillar-item {
+    width: 110px;
+  }
+  .pillar-circle {
+    width: 70px;
+    height: 70px;
+  }
+  .svg-pillar {
+    width: 70px;
+    height: 70px;
+  }
+  .genera-objetivos-title {
+    font-size: 1.6rem;
+    margin-bottom: 35px;
+  }
+}
+
+</style>
 
 </style>
 
@@ -432,6 +767,155 @@ body {
             </div>
         </div>
     </section>
+
+    <!-- SECTION 4: OBJETIVOS ODS -->
+    <section class="genera-objetivos">
+        <div class="genera-objetivos-wrapper">
+            <h2 class="genera-objetivos-title">
+                Nuestras líneas de acción tienen su base en los Objetivos de Desarrollo Sostenible de la Organización de las Naciones Unidas.
+            </h2>
+            
+            <div class="genera-objetivos-grid">
+                <!-- Left: Grid of 4 Cards -->
+                <div class="ods-cards-grid">
+                    <!-- Card 1: 8 & 11 (Prosperidad) -->
+                    <div class="ods-card" data-group="prosperidad">
+                        <div class="ods-card-content">
+                            <div class="ods-icon-wrapper">
+                                <?php render_svg('ODS_ONU_ICON08 1.svg', 'ods-svg-icon icon-8'); ?>
+                            </div>
+                            <div class="ods-icon-wrapper">
+                                <?php render_svg('ODS_ONU_ICON11 1.svg', 'ods-svg-icon icon-11'); ?>
+                            </div>
+                        </div>
+                        <div class="ods-card-line line-prosperidad"></div>
+                    </div>
+
+                    <!-- Card 2: 5 & 10 (Desarrollo) -->
+                    <div class="ods-card" data-group="comunitario">
+                        <div class="ods-card-content">
+                            <div class="ods-icon-wrapper">
+                                <?php render_svg('ODS_ONU_ICON05 1.svg', 'ods-svg-icon icon-5'); ?>
+                            </div>
+                            <div class="ods-icon-wrapper">
+                                <?php render_svg('ODS_ONU_ICON10 1.svg', 'ods-svg-icon icon-10'); ?>
+                            </div>
+                        </div>
+                        <div class="ods-card-line line-comunitario"></div>
+                    </div>
+
+                    <!-- Card 3: 12 & 14 (Oceano) -->
+                    <div class="ods-card" data-group="oceano">
+                        <div class="ods-card-content">
+                            <div class="ods-icon-wrapper">
+                                <?php render_svg('ODS_ONU_ICON12 1.svg', 'ods-svg-icon icon-12'); ?>
+                            </div>
+                            <div class="ods-icon-wrapper">
+                                <?php render_svg('ODS_ONU_ICON14 1.svg', 'ods-svg-icon icon-14'); ?>
+                            </div>
+                        </div>
+                        <div class="ods-card-line line-oceano"></div>
+                    </div>
+
+                    <!-- Card 4: 16 & 17 (Todos) -->
+                    <div class="ods-card" data-group="todos">
+                        <div class="ods-card-content">
+                            <div class="ods-icon-wrapper">
+                                <?php render_svg('ODS_ONU_ICON16 1.svg', 'ods-svg-icon icon-16'); ?>
+                            </div>
+                            <div class="ods-icon-wrapper">
+                                <?php render_svg('ODS_ONU_ICON17 1.svg', 'ods-svg-icon icon-17'); ?>
+                            </div>
+                        </div>
+                        <div class="ods-card-line line-triple">
+                            <div class="line-segment segment-prosperidad"></div>
+                            <div class="line-segment segment-comunitario"></div>
+                            <div class="line-segment segment-oceano"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Pillars Status List -->
+                <div class="pillars-col">
+                    <div class="pillar-item" data-pillar="prosperidad">
+                        <div class="pillar-circle">
+                            <?php render_svg('prosperidadeconomica.svg', 'svg-pillar'); ?>
+                        </div>
+                        <span class="pillar-label">Prosperidad económica</span>
+                    </div>
+                    <div class="pillar-item" data-pillar="comunitario">
+                        <div class="pillar-circle">
+                            <?php render_svg('desarrollocomunitario.svg', 'svg-pillar'); ?>
+                        </div>
+                        <span class="pillar-label">Desarrollo comunitario</span>
+                    </div>
+                    <div class="pillar-item" data-pillar="oceano">
+                        <div class="pillar-circle">
+                            <?php render_svg('proteccionoceano.svg', 'svg-pillar'); ?>
+                        </div>
+                        <span class="pillar-label">Protección del océano</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer: ODS Logo -->
+            <div class="ods-footer">
+                <img src="<?php echo $basePath; ?>objetivos/Group 28.png" alt="Objetivos de Desarrollo Sostenible" class="ods-footer-logo">
+            </div>
+        </div>
+    </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.ods-card');
+        const pillars = document.querySelectorAll('.pillar-item');
+
+        function selectGroup(group) {
+            // Set active card
+            cards.forEach(card => {
+                if (card.dataset.group === group) {
+                    card.classList.add('active');
+                    card.classList.remove('inactive');
+                } else {
+                    card.classList.remove('active');
+                    card.classList.add('inactive');
+                }
+            });
+
+            // Set active pillars on the right
+            pillars.forEach(pillar => {
+                const pType = pillar.dataset.pillar;
+                let shouldBeActive = false;
+
+                if (group === 'prosperidad' && pType === 'prosperidad') {
+                    shouldBeActive = true;
+                } else if (group === 'comunitario' && pType === 'comunitario') {
+                    shouldBeActive = true;
+                } else if (group === 'oceano' && pType === 'oceano') {
+                    shouldBeActive = true;
+                } else if (group === 'todos') {
+                    shouldBeActive = true; // All three active
+                }
+
+                if (shouldBeActive) {
+                    pillar.classList.add('active');
+                } else {
+                    pillar.classList.remove('active');
+                }
+            });
+        }
+
+        // Add click listeners to cards
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                selectGroup(card.dataset.group);
+            });
+        });
+
+        // Select the first group (8 & 11) by default on load
+        selectGroup('prosperidad');
+    });
+    </script>
 </div>
 
 <?php
