@@ -627,10 +627,13 @@ body {
 }
 
 .ods-footer-logo {
-  height: 55px;
+  height: auto;
+  max-height: 55px;
   width: auto;
   max-width: 100%;
+  object-fit: contain;
   opacity: 0.95;
+  flex-shrink: 0;
 }
 
 /* Responsiveness for new section */
@@ -690,9 +693,12 @@ body {
     font-size: 1.6rem;
     margin-bottom: 35px;
   }
+  .ods-footer-logo {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+  }
 }
-
-</style>
 
 </style>
 
@@ -772,7 +778,7 @@ body {
     <section class="genera-objetivos">
         <div class="genera-objetivos-wrapper">
             <h2 class="genera-objetivos-title">
-                Nuestras líneas de acción tienen su base en los Objetivos de Desarrollo Sostenible de la Organización de las Naciones Unidas.
+                Nuestras líneas de acción tienen su base en los Objetivos de Desarrollo Sostenible de la Organización de las Naciones&nbsp;Unidas.
             </h2>
             
             <div class="genera-objetivos-grid">
@@ -782,10 +788,10 @@ body {
                     <div class="ods-card" data-group="prosperidad">
                         <div class="ods-card-content">
                             <div class="ods-icon-wrapper">
-                                <?php render_svg('ODS_ONU_ICON08 1.svg', 'ods-svg-icon icon-8'); ?>
+                                <?php render_svg('ods-08-trabajo-decente.svg', 'ods-svg-icon icon-8'); ?>
                             </div>
                             <div class="ods-icon-wrapper">
-                                <?php render_svg('ODS_ONU_ICON11 1.svg', 'ods-svg-icon icon-11'); ?>
+                                <?php render_svg('ods-11-ciudades-sostenibles.svg', 'ods-svg-icon icon-11'); ?>
                             </div>
                         </div>
                         <div class="ods-card-line line-prosperidad"></div>
@@ -795,10 +801,10 @@ body {
                     <div class="ods-card" data-group="comunitario">
                         <div class="ods-card-content">
                             <div class="ods-icon-wrapper">
-                                <?php render_svg('ODS_ONU_ICON05 1.svg', 'ods-svg-icon icon-5'); ?>
+                                <?php render_svg('ods-05-igualdad-genero.svg', 'ods-svg-icon icon-5'); ?>
                             </div>
                             <div class="ods-icon-wrapper">
-                                <?php render_svg('ODS_ONU_ICON10 1.svg', 'ods-svg-icon icon-10'); ?>
+                                <?php render_svg('ods-10-reduccion-desigualdades.svg', 'ods-svg-icon icon-10'); ?>
                             </div>
                         </div>
                         <div class="ods-card-line line-comunitario"></div>
@@ -808,10 +814,10 @@ body {
                     <div class="ods-card" data-group="oceano">
                         <div class="ods-card-content">
                             <div class="ods-icon-wrapper">
-                                <?php render_svg('ODS_ONU_ICON12 1.svg', 'ods-svg-icon icon-12'); ?>
+                                <?php render_svg('ods-12-produccion-consumo-responsable.svg', 'ods-svg-icon icon-12'); ?>
                             </div>
                             <div class="ods-icon-wrapper">
-                                <?php render_svg('ODS_ONU_ICON14 1.svg', 'ods-svg-icon icon-14'); ?>
+                                <?php render_svg('ods-14-vida-submarina.svg', 'ods-svg-icon icon-14'); ?>
                             </div>
                         </div>
                         <div class="ods-card-line line-oceano"></div>
@@ -821,10 +827,10 @@ body {
                     <div class="ods-card" data-group="todos">
                         <div class="ods-card-content">
                             <div class="ods-icon-wrapper">
-                                <?php render_svg('ODS_ONU_ICON16 1.svg', 'ods-svg-icon icon-16'); ?>
+                                <?php render_svg('ods-16-paz-justicia.svg', 'ods-svg-icon icon-16'); ?>
                             </div>
                             <div class="ods-icon-wrapper">
-                                <?php render_svg('ODS_ONU_ICON17 1.svg', 'ods-svg-icon icon-17'); ?>
+                                <?php render_svg('ods-17-alianzas.svg', 'ods-svg-icon icon-17'); ?>
                             </div>
                         </div>
                         <div class="ods-card-line line-triple">
@@ -839,19 +845,19 @@ body {
                 <div class="pillars-col">
                     <div class="pillar-item" data-pillar="prosperidad">
                         <div class="pillar-circle">
-                            <?php render_svg('prosperidadeconomica.svg', 'svg-pillar'); ?>
+                            <?php render_svg('prosperidad-economica.svg', 'svg-pillar'); ?>
                         </div>
                         <span class="pillar-label">Prosperidad económica</span>
                     </div>
                     <div class="pillar-item" data-pillar="comunitario">
                         <div class="pillar-circle">
-                            <?php render_svg('desarrollocomunitario.svg', 'svg-pillar'); ?>
+                            <?php render_svg('desarrollo-comunitario.svg', 'svg-pillar'); ?>
                         </div>
                         <span class="pillar-label">Desarrollo comunitario</span>
                     </div>
                     <div class="pillar-item" data-pillar="oceano">
                         <div class="pillar-circle">
-                            <?php render_svg('proteccionoceano.svg', 'svg-pillar'); ?>
+                            <?php render_svg('proteccion-oceano.svg', 'svg-pillar'); ?>
                         </div>
                         <span class="pillar-label">Protección del océano</span>
                     </div>
@@ -860,7 +866,7 @@ body {
 
             <!-- Footer: ODS Logo -->
             <div class="ods-footer">
-                <img src="<?php echo $basePath; ?>objetivos/Group 28.png" alt="Objetivos de Desarrollo Sostenible" class="ods-footer-logo">
+                <img src="<?php echo $basePath; ?>objetivos/logo-ods.png" alt="Objetivos de Desarrollo Sostenible" class="ods-footer-logo">
             </div>
         </div>
     </section>
