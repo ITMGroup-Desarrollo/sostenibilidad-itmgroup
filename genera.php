@@ -233,16 +233,61 @@ body {
   align-items: center;
 }
 
-.genera-fundacion-wheel-img {
+.genera-wheel-wrapper svg {
   width: 100%;
   height: auto;
+  overflow: visible;
   filter: drop-shadow(0 10px 25px rgba(12, 35, 64, 0.08));
-  transition: var(--transition-smooth);
 }
 
-.genera-fundacion-wheel-img:hover {
-  transform: scale(1.03);
-  filter: drop-shadow(0 15px 30px rgba(12, 35, 64, 0.12));
+/* GOBERNANZA SVG INTERACTIVITY */
+#Capa_6, #Capa_3, #Capa_4, #Capa_8 {
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease, opacity 0.35s ease;
+}
+
+#Capa_8 {
+  filter: grayscale(100%);
+  opacity: 0.85;
+}
+
+#Capa_7, #Capa_2, #Capa_5 {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.6);
+}
+
+.gobernanza-segment {
+  filter: grayscale(100%);
+  opacity: 0.45;
+}
+
+#Capa_6:hover, #Capa_3:hover, #Capa_4:hover {
+  transform: scale(1.1);
+  filter: grayscale(0%) !important;
+  opacity: 1 !important;
+}
+
+#Capa_8:hover, #Capa_8.active {
+  transform: scale(1.06);
+  filter: grayscale(0%) !important;
+  opacity: 1 !important;
+}
+
+.gobernanza-segment.active {
+  filter: grayscale(0%) !important;
+  opacity: 1 !important;
+}
+
+.gobernanza-icon.active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: scale(1) !important;
 }
 
 /* SECTION 3: PILARES CARDS */
@@ -1235,7 +1280,12 @@ body {
             </div>
             <div class="genera-fundacion-wheel-col">
                 <div class="genera-wheel-wrapper">
-                    <img src="<?php echo $basePath; ?>gobernanza.png" alt="Gobernanza Portuaria" class="genera-fundacion-wheel-img">
+                    <?php 
+                    $govSvg = __DIR__ . '/gobernanza.svg';
+                    if (file_exists($govSvg)) {
+                        echo file_get_contents($govSvg);
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -1435,6 +1485,54 @@ body {
 
         // Select the first group (8 & 11) by default on load
         selectGroup('prosperidad');
+
+        // GOBERNANZA WHEEL INTERACTIVITY
+        const segProsperidad = document.getElementById('Capa_6'); // Segment Prosperidad (Orange)
+        const segComunitario = document.getElementById('Capa_3'); // Segment Comunitario (Pink)
+        const segOceano = document.getElementById('Capa_4');     // Segment Oceano (Blue)
+        const centerCircle = document.getElementById('Capa_8');  // Center Circle (Gobernanza)
+
+        const iconProsperidad = document.getElementById('Capa_7'); // Icon Prosperidad (Orange)
+        const iconComunitario = document.getElementById('Capa_2'); // Icon Comunitario (Pink)
+        const iconOceano = document.getElementById('Capa_5');     // Icon Oceano (Blue)
+
+        if (segProsperidad && segComunitario && segOceano && centerCircle) {
+            segProsperidad.classList.add('gobernanza-segment');
+            segComunitario.classList.add('gobernanza-segment');
+            segOceano.classList.add('gobernanza-segment');
+
+            if (iconProsperidad) iconProsperidad.classList.add('gobernanza-icon');
+            if (iconComunitario) iconComunitario.classList.add('gobernanza-icon');
+            if (iconOceano) iconOceano.classList.add('gobernanza-icon');
+
+            // Initial state: Prosperidad segment + Prosperidad icon active at load
+            setActiveSegment(segProsperidad, iconProsperidad);
+
+            function setActiveSegment(activeSeg, activeIcon) {
+                [segProsperidad, segComunitario, segOceano].forEach(s => s.classList.remove('active'));
+                [iconProsperidad, iconComunitario, iconOceano].forEach(i => {
+                    if (i) i.classList.remove('active');
+                });
+                centerCircle.classList.remove('active');
+
+                if (activeSeg) activeSeg.classList.add('active');
+                if (activeIcon) activeIcon.classList.add('active');
+            }
+
+            function activateAll() {
+                [segProsperidad, segComunitario, segOceano].forEach(s => s.classList.add('active'));
+                [iconProsperidad, iconComunitario, iconOceano].forEach(i => {
+                    if (i) i.classList.add('active');
+                });
+                centerCircle.classList.add('active');
+            }
+
+            segProsperidad.addEventListener('click', () => setActiveSegment(segProsperidad, iconProsperidad));
+            segComunitario.addEventListener('click', () => setActiveSegment(segComunitario, iconComunitario));
+            segOceano.addEventListener('click', () => setActiveSegment(segOceano, iconOceano));
+
+            centerCircle.addEventListener('click', activateAll);
+        }
 
         // PROGRAMS MODAL INTERACTIVITY
         const modal = document.getElementById('programaModal');
