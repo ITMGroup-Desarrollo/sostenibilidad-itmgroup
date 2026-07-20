@@ -1991,9 +1991,11 @@ body {
 
             <!-- Footer: Cancun Center Logo & Text -->
             <div class="programas-footer">
-                <div class="cancun-center-logo">
-                    <?php render_svg('logo-fundacion-cancun-center.svg', '', 'programas'); ?>
-                </div>
+                <a href="https://www.instagram.com/fundacioncancuncenter/" target="_blank" rel="noopener noreferrer" class="instagram-link">
+                    <div class="cancun-center-logo">
+                        <?php render_svg('logo-fundacion-cancun-center.svg', '', 'programas'); ?>
+                    </div>
+                </a>
                 <p class="programas-footer-text">
                     A través de Fundación Cancún Center, gestionamos alianzas con cada evento realizado en el Centro de Convenciones Cancún Center para impulsar proyectos comunitarios y ambientales en Quintana Roo.
                 </p>
