@@ -968,7 +968,99 @@ body {
     padding: 0 15px;
   }
 }
+/* FULL-WIDTH VIDEO BANNER (BETWEEN SECTION 4 & SECTION 5) */
+.genera-video-banner {
+  width: 100vw;
+  height: 95dvh;
+  max-height: 95dvh;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  line-height: 0;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.genera-full-video {
+  width: 100%;
+  height: 95dvh;
+  max-height: 95dvh;
+  display: block;
+  object-fit: cover;
+}
+
+/* PREVIEW OVERLAY & PLAY BUTTON */
+.genera-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  cursor: pointer;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.video-overlay-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(12, 35, 64, 0.35);
+  transition: background 0.3s ease;
+}
+
+.genera-video-overlay:hover .video-overlay-backdrop {
+  background: rgba(12, 35, 64, 0.2);
+}
+
+.genera-play-btn {
+  position: relative;
+  z-index: 12;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 3px solid #ffffff;
+  color: #0C2340;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.genera-play-btn svg.play-icon {
+  width: 36px;
+  height: 36px;
+  margin-left: 4px;
+  fill: #0C2340;
+  transition: fill 0.3s ease;
+}
+
+.genera-video-overlay:hover .genera-play-btn {
+  transform: scale(1.12);
+  background-color: #ffffff;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.genera-video-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 /* SECTION 5: MODAL POPUP FOR PROGRAMS */
 .programa-modal-overlay {
   position: fixed;
@@ -1681,9 +1773,36 @@ body {
                 closeModal();
             }
         });
+
+        // VIDEO BANNER INTERACTIVITY
+        const videoElement = document.getElementById('generaFundacionVideo');
+        const videoOverlay = document.getElementById('generaVideoOverlay');
+
+        if (videoElement && videoOverlay) {
+            videoOverlay.addEventListener('click', () => {
+                videoOverlay.classList.add('hidden');
+                videoElement.play();
+            });
+        }
     });
     </script>
+    <!-- FULL-WIDTH VIDEO BANNER -->
+    <section class="genera-video-banner">
+        <video id="generaFundacionVideo" class="genera-full-video" controls preload="metadata" poster="<?php echo $basePath; ?>header-genera.png">
+            <source src="<?php echo $basePath; ?>fundacion-genera.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+        </video>
 
+        <!-- Video Preview Overlay with Play Button -->
+        <div id="generaVideoOverlay" class="genera-video-overlay" style="background-image: url('<?php echo $basePath; ?>header-genera.png');">
+            <div class="video-overlay-backdrop"></div>
+            <button id="generaPlayBtn" class="genera-play-btn" aria-label="Reproducir video">
+                <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+            </button>
+        </div>
+    </section>
     <!-- SECTION 5: PROGRAMAS EMBLEMA -->
     <section class="genera-programas">
         <div class="genera-programas-wrapper">
