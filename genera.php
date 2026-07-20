@@ -245,14 +245,27 @@ body {
   cursor: pointer;
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease, opacity 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-#Capa_8 {
-  filter: grayscale(100%);
-  opacity: 0.85;
+/* Inactive state fill transitions */
+#Capa_6 .st5, #Capa_3 .st1, #Capa_4 .st4, #Capa_8 .st2 {
+  transition: fill 0.35s ease;
 }
 
+/* Outer circle segments default inactive color (Light-Medium Gray) */
+.gobernanza-segment:not(.active) .st1,
+.gobernanza-segment:not(.active) .st4,
+.gobernanza-segment:not(.active) .st5 {
+  fill: #aaaaaa !important;
+}
+
+/* Center circle default inactive color (Darker Gray) */
+#Capa_8:not(.active) .st2 {
+  fill: #555555 !important;
+}
+
+/* Outer icons setup */
 #Capa_7, #Capa_2, #Capa_5 {
   transform-box: fill-box;
   transform-origin: center;
@@ -262,26 +275,29 @@ body {
   transform: scale(0.6);
 }
 
-.gobernanza-segment {
-  filter: grayscale(100%);
-  opacity: 0.45;
-}
-
+/* Hover & Active states: Original colors & scaling */
 #Capa_6:hover, #Capa_3:hover, #Capa_4:hover {
   transform: scale(1.1);
-  filter: grayscale(0%) !important;
-  opacity: 1 !important;
+}
+
+#Capa_6:hover .st5, #Capa_6.active .st5 {
+  fill: #f1992a !important;
+}
+
+#Capa_3:hover .st1, #Capa_3.active .st1 {
+  fill: #dc1680 !important;
+}
+
+#Capa_4:hover .st4, #Capa_4.active .st4 {
+  fill: #10acd7 !important;
 }
 
 #Capa_8:hover, #Capa_8.active {
   transform: scale(1.06);
-  filter: grayscale(0%) !important;
-  opacity: 1 !important;
 }
 
-.gobernanza-segment.active {
-  filter: grayscale(0%) !important;
-  opacity: 1 !important;
+#Capa_8:hover .st2, #Capa_8.active .st2 {
+  fill: #662483 !important;
 }
 
 .gobernanza-icon.active {
