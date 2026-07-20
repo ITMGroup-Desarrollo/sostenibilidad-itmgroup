@@ -548,6 +548,7 @@ body {
   width: 140px;
   transition: transform 0.3s ease;
   user-select: none;
+  cursor: pointer;
 }
 
 .pillar-item:hover {
@@ -965,6 +966,7 @@ body {
 .programa-modal-box {
   flex: 1;
   background-color: #ffffff;
+  border-radius: 28px;
   padding: 40px;
   position: relative;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
@@ -1151,6 +1153,7 @@ body {
   }
   .programa-modal-box {
     padding: 30px;
+    border-radius: 24px;
     overflow-y: auto;
   }
   .programa-modal-sidebar {
@@ -1420,6 +1423,13 @@ body {
         cards.forEach(card => {
             card.addEventListener('click', () => {
                 selectGroup(card.dataset.group);
+            });
+        });
+
+        // Add click listeners to pillars (right SVGs/logos)
+        pillars.forEach(pillar => {
+            pillar.addEventListener('click', () => {
+                selectGroup(pillar.dataset.pillar);
             });
         });
 
