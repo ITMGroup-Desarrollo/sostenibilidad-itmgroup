@@ -342,28 +342,72 @@ body {
 }
 
 .genera-pilar-text-block {
-  padding: 40px 30%;
+  padding: 35px 28px;
   background-color: var(--darkblue);
   color: var(--text-light);
   transition: background-color 0.35s ease;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.pilar-icon-wrapper {
+  flex-shrink: 0;
+  width: 62px;
+  height: 62px;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  transition: transform 0.35s ease;
+}
+
+.pilar-svg-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pilar-text-content {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
 }
 
 .genera-pilar-card-title {
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 700;
-  margin: 0 0 15px 0;
-  line-height: 1.2;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
 }
 
 .genera-pilar-card-description {
   font-size: 0.95rem;
-  line-height: 1.2;
+  line-height: 1.4;
   margin: 0;
   opacity: 0.90;
+}
+
+/* Pillar SVG Fill Colors (Default state) */
+.pilar-prosperidad .pilar-svg-icon path:first-of-type {
+  fill: var(--accent-orange, #f1992a);
+  transition: fill 0.35s ease;
+}
+
+.pilar-desarrollo .pilar-svg-icon path:first-of-type {
+  fill: var(--accent-pink, #dc1680);
+  transition: fill 0.35s ease;
+}
+
+.pilar-oceano .pilar-svg-icon path:first-of-type {
+  fill: var(--accent-blue, #10acd7);
+  transition: fill 0.35s ease;
+}
+
+.pilar-svg-icon path:not(:first-of-type) {
+  fill: #ffffff;
+  transition: fill 0.35s ease;
 }
 
 /* Hover color shifts for individual pillars */
@@ -379,6 +423,29 @@ body {
   background-color: var(--accent-blue);
 }
 
+/* Hover SVG Icon Inversion */
+.pilar-prosperidad:hover .pilar-svg-icon path:first-of-type,
+.pilar-desarrollo:hover .pilar-svg-icon path:first-of-type,
+.pilar-oceano:hover .pilar-svg-icon path:first-of-type {
+  fill: #ffffff;
+}
+
+.pilar-prosperidad:hover .pilar-svg-icon path:not(:first-of-type) {
+  fill: var(--accent-orange, #f1992a);
+}
+
+.pilar-desarrollo:hover .pilar-svg-icon path:not(:first-of-type) {
+  fill: var(--accent-pink, #dc1680);
+}
+
+.pilar-oceano:hover .pilar-svg-icon path:not(:first-of-type) {
+  fill: var(--accent-blue, #10acd7);
+}
+
+.genera-pilar-card:hover .pilar-icon-wrapper {
+  transform: scale(1.08);
+}
+
 @media (max-width: 991px) {
   .genera-pilares {
     padding: 70px 0;
@@ -387,7 +454,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
   }
-    .genera-fundacion {
+  .genera-fundacion {
     padding: 70px 0;
   }
   .genera-fundacion-grid {
@@ -399,14 +466,20 @@ body {
     font-size: 2.5rem;
   }
   .genera-pilar-text-block {
-  padding: 40px 30px;
-}
+    padding: 30px 24px;
+  }
 }
 
 @media (max-width: 768px) {
   .genera-pilares-grid {
     grid-template-columns: 1fr;
     gap: 30px;
+  }
+  .genera-pilar-text-block {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 30px 24px;
   }
   .genera-pilar-img-wrapper {
     height: 260px;
@@ -1393,16 +1466,26 @@ body {
                     <img class="genera-pilar-img" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=600&auto=format&fit=crop" alt="Prosperidad económica">
                 </div>
                 <div class="genera-pilar-text-block">
-                    <h3 class="genera-pilar-card-title">Prosperidad económica</h3>
-                    <p class="genera-pilar-card-description">Integramos talento local a la actividad turística para generar ingresos dignos y sostenibles.</p>
+                    <div class="pilar-icon-wrapper">
+                        <?php render_svg('prosperidad-economica.svg', 'pilar-svg-icon', 'objetivos'); ?>
+                    </div>
+                    <div class="pilar-text-content">
+                        <h3 class="genera-pilar-card-title">Prosperidad económica</h3>
+                        <p class="genera-pilar-card-description">Integramos talento local a la actividad turística para generar ingresos dignos y sostenibles.</p>
+                    </div>
                 </div>
             </div>
 
             <!-- Pilar 2: Desarrollo Comunitario (Staggered Layout: Text on top, Image at bottom) -->
             <div class="genera-pilar-card pilar-desarrollo">
                 <div class="genera-pilar-text-block">
-                    <h3 class="genera-pilar-card-title">Desarrollo comunitario</h3>
-                    <p class="genera-pilar-card-description">Fortalecemos el tejido social de la comunidad promoviendo la participación para lograr el bienestar colectivo.</p>
+                    <div class="pilar-icon-wrapper">
+                        <?php render_svg('desarrollo-comunitario.svg', 'pilar-svg-icon', 'objetivos'); ?>
+                    </div>
+                    <div class="pilar-text-content">
+                        <h3 class="genera-pilar-card-title">Desarrollo comunitario</h3>
+                        <p class="genera-pilar-card-description">Fortalecemos el tejido social de la comunidad promoviendo la participación para lograr el bienestar colectivo.</p>
+                    </div>
                 </div>
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Woven artisan bags. Replace src with your local image: <?php echo $basePath; ?>pilar-comunidad.png -->
@@ -1417,8 +1500,13 @@ body {
                     <img class="genera-pilar-img" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=600&auto=format&fit=crop" alt="Protección del océano">
                 </div>
                 <div class="genera-pilar-text-block">
-                    <h3 class="genera-pilar-card-title">Protección del océano</h3>
-                    <p class="genera-pilar-card-description">Fomentamos la educación y participación local en las prácticas de conservación de los ecosistemas marinos y costeros.</p>
+                    <div class="pilar-icon-wrapper">
+                        <?php render_svg('proteccion-oceano.svg', 'pilar-svg-icon', 'objetivos'); ?>
+                    </div>
+                    <div class="pilar-text-content">
+                        <h3 class="genera-pilar-card-title">Protección del océano</h3>
+                        <p class="genera-pilar-card-description">Fomentamos la educación y participación local en las prácticas de conservación de los ecosistemas marinos y costeros.</p>
+                    </div>
                 </div>
             </div>
         </div>
