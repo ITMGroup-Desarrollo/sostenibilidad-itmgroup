@@ -168,7 +168,7 @@ body {
 
 /* SECTION 2: FUNDACIÓN & GOBERNANZA */
 .genera-fundacion {
-  padding: 100px 0;
+  padding: 100px 0 0 0;
   position: relative;
 }
 
@@ -455,7 +455,7 @@ body {
     gap: 25px;
   }
   .genera-fundacion {
-    padding: 70px 0;
+    padding: 70px 0 0 0;
   }
   .genera-fundacion-grid {
     grid-template-columns: 1fr;
@@ -1649,10 +1649,18 @@ body {
             });
         }
 
+        const pillarsCol = document.querySelector('.pillars-col');
+        const odsCardsGrid = document.querySelector('.ods-cards-grid');
+
         // Add click listeners to cards
         cards.forEach(card => {
             card.addEventListener('click', () => {
                 selectGroup(card.dataset.group);
+
+                // Mobile auto-scroll down to pillars column
+                if (window.innerWidth <= 991 && pillarsCol) {
+                    pillarsCol.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
             });
         });
 
@@ -1660,6 +1668,17 @@ body {
         pillars.forEach(pillar => {
             pillar.addEventListener('click', () => {
                 selectGroup(pillar.dataset.pillar);
+
+                // Mobile auto-scroll up to the illuminated card
+                if (window.innerWidth <= 991) {
+                    const targetGroup = pillar.dataset.pillar;
+                    const targetCard = Array.from(cards).find(c => c.dataset.group === targetGroup);
+                    if (targetCard) {
+                        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else if (odsCardsGrid) {
+                        odsCardsGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
             });
         });
 
@@ -1876,13 +1895,13 @@ body {
     </script>
     <!-- FULL-WIDTH VIDEO BANNER -->
     <section class="genera-video-banner">
-        <video id="generaFundacionVideo" class="genera-full-video" controls preload="metadata" poster="<?php echo $basePath; ?>header-genera.png">
+        <video id="generaFundacionVideo" class="genera-full-video" controls preload="metadata" poster="<?php echo $basePath; ?>preview-video.jpeg">
             <source src="<?php echo $basePath; ?>fundacion-genera.mp4" type="video/mp4">
             Tu navegador no soporta la reproducción de video.
         </video>
 
         <!-- Video Preview Overlay with Play Button -->
-        <div id="generaVideoOverlay" class="genera-video-overlay" style="background-image: url('<?php echo $basePath; ?>header-genera.png');">
+        <div id="generaVideoOverlay" class="genera-video-overlay" style="background-image: url('<?php echo $basePath; ?>preview-video.jpeg');">
             <div class="video-overlay-backdrop"></div>
             <button id="generaPlayBtn" class="genera-play-btn" aria-label="Reproducir video">
                 <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
