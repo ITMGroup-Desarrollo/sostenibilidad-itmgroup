@@ -1192,8 +1192,8 @@ body {
 .programa-modal-box {
   flex: 1;
   background-color: #ffffff;
-  border-radius: 28px;
-  padding: 40px;
+  border-radius: 54px;
+  padding: 40px 40px 20px;
   position: relative;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -1204,8 +1204,8 @@ body {
 /* Close Button */
 .modal-close-btn {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 15px;
+  right: 20px;
   background: none;
   border: none;
   font-size: 2.2rem;
