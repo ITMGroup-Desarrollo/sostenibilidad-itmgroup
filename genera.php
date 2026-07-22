@@ -329,12 +329,14 @@ body {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(12, 35, 64, 0.04);
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), outline 0.3s ease;
   cursor: pointer;
   height: 100%;
+  outline: 3px solid transparent;
+  outline-offset: 3px;
 }
 
-.genera-pilar-card:hover {
+.genera-pilar-card:hover, .genera-pilar-card.active-focus {
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(12, 35, 64, 0.12);
 }
@@ -353,7 +355,8 @@ body {
   transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.genera-pilar-card:hover .genera-pilar-img {
+.genera-pilar-card:hover .genera-pilar-img,
+.genera-pilar-card.active-focus .genera-pilar-img {
   transform: scale(1.05);
 }
 
@@ -427,39 +430,63 @@ body {
 }
 
 /* Hover color shifts for individual pillars */
-.pilar-prosperidad:hover .genera-pilar-text-block {
+.pilar-prosperidad:hover .genera-pilar-text-block,
+.pilar-prosperidad.active-focus .genera-pilar-text-block {
   background-color: var(--accent-orange);
 }
 
-.pilar-desarrollo:hover .genera-pilar-text-block {
+.pilar-desarrollo:hover .genera-pilar-text-block,
+.pilar-desarrollo.active-focus .genera-pilar-text-block {
   background-color: var(--accent-pink);
 }
 
-.pilar-oceano:hover .genera-pilar-text-block {
+.pilar-oceano:hover .genera-pilar-text-block,
+.pilar-oceano.active-focus .genera-pilar-text-block {
   background-color: var(--accent-blue);
 }
 
-/* Hover SVG Icon Inversion */
+/* Hover & Active Focus SVG Icon Inversion */
 .pilar-prosperidad:hover .pilar-svg-icon path:first-of-type,
+.pilar-prosperidad.active-focus .pilar-svg-icon path:first-of-type,
 .pilar-desarrollo:hover .pilar-svg-icon path:first-of-type,
-.pilar-oceano:hover .pilar-svg-icon path:first-of-type {
+.pilar-desarrollo.active-focus .pilar-svg-icon path:first-of-type,
+.pilar-oceano:hover .pilar-svg-icon path:first-of-type,
+.pilar-oceano.active-focus .pilar-svg-icon path:first-of-type {
   fill: #ffffff;
 }
 
-.pilar-prosperidad:hover .pilar-svg-icon path:not(:first-of-type) {
+.pilar-prosperidad:hover .pilar-svg-icon path:not(:first-of-type),
+.pilar-prosperidad.active-focus .pilar-svg-icon path:not(:first-of-type) {
   fill: var(--accent-orange, #f1992a);
 }
 
-.pilar-desarrollo:hover .pilar-svg-icon path:not(:first-of-type) {
+.pilar-desarrollo:hover .pilar-svg-icon path:not(:first-of-type),
+.pilar-desarrollo.active-focus .pilar-svg-icon path:not(:first-of-type) {
   fill: var(--accent-pink, #dc1680);
 }
 
-.pilar-oceano:hover .pilar-svg-icon path:not(:first-of-type) {
+.pilar-oceano:hover .pilar-svg-icon path:not(:first-of-type),
+.pilar-oceano.active-focus .pilar-svg-icon path:not(:first-of-type) {
   fill: var(--accent-blue, #10acd7);
 }
 
-.genera-pilar-card:hover .pilar-icon-wrapper {
+.genera-pilar-card:hover .pilar-icon-wrapper,
+.genera-pilar-card.active-focus .pilar-icon-wrapper {
   transform: scale(1.08);
+}
+
+/* Active focus color outlines and shadow glows */
+.genera-pilar-card.active-focus.pilar-prosperidad {
+  outline-color: var(--accent-orange);
+  box-shadow: 0 20px 45px rgba(241, 153, 42, 0.35);
+}
+.genera-pilar-card.active-focus.pilar-desarrollo {
+  outline-color: var(--accent-pink);
+  box-shadow: 0 20px 45px rgba(220, 22, 128, 0.35);
+}
+.genera-pilar-card.active-focus.pilar-oceano {
+  outline-color: var(--accent-blue);
+  box-shadow: 0 20px 45px rgba(16, 172, 215, 0.35);
 }
 
 @media (max-width: 991px) {
@@ -1742,11 +1769,71 @@ body {
                 centerCircle.classList.add('active');
             }
 
-            segProsperidad.addEventListener('click', () => setActiveSegment(segProsperidad, iconProsperidad));
-            segComunitario.addEventListener('click', () => setActiveSegment(segComunitario, iconComunitario));
-            segOceano.addEventListener('click', () => setActiveSegment(segOceano, iconOceano));
+            // Reference the pilar cards
+            const cardProsperidad = document.querySelector('.genera-pilar-card.pilar-prosperidad');
+            const cardDesarrollo = document.querySelector('.genera-pilar-card.pilar-desarrollo');
+            const cardOceano = document.querySelector('.genera-pilar-card.pilar-oceano');
 
-            centerCircle.addEventListener('click', activateAll);
+            function focusCard(cardElement) {
+                document.querySelectorAll('.genera-pilar-card').forEach(card => {
+                    card.classList.remove('active-focus');
+                });
+                if (cardElement) {
+                    cardElement.classList.add('active-focus');
+                }
+            }
+
+            segProsperidad.addEventListener('click', () => {
+                setActiveSegment(segProsperidad, iconProsperidad);
+                focusCard(cardProsperidad);
+                if (cardProsperidad) {
+                    cardProsperidad.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+            segComunitario.addEventListener('click', () => {
+                setActiveSegment(segComunitario, iconComunitario);
+                focusCard(cardDesarrollo);
+                if (cardDesarrollo) {
+                    cardDesarrollo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+            segOceano.addEventListener('click', () => {
+                setActiveSegment(segOceano, iconOceano);
+                focusCard(cardOceano);
+                if (cardOceano) {
+                    cardOceano.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+
+            centerCircle.addEventListener('click', () => {
+                activateAll();
+                focusCard(null);
+            });
+
+            // Click handlers for cards directly to light them up
+            [cardProsperidad, cardDesarrollo, cardOceano].forEach(card => {
+                if (card) {
+                    card.addEventListener('click', () => {
+                        focusCard(card);
+                        if (card === cardProsperidad) {
+                            setActiveSegment(segProsperidad, iconProsperidad);
+                        } else if (card === cardDesarrollo) {
+                            setActiveSegment(segComunitario, iconComunitario);
+                        } else if (card === cardOceano) {
+                            setActiveSegment(segOceano, iconOceano);
+                        }
+                    });
+                }
+            });
+
+            // Click outside to clear focus
+            document.addEventListener('click', (e) => {
+                const clickedWheel = e.target.closest('.genera-wheel-wrapper');
+                const clickedCard = e.target.closest('.genera-pilar-card');
+                if (!clickedWheel && !clickedCard) {
+                    focusCard(null);
+                }
+            });
         }
 
         // PROGRAMS MODAL INTERACTIVITY
