@@ -1398,6 +1398,10 @@ body {
 
 /* Responsive Rules for Modal */
 @media (max-width: 991px) {
+  .modal-close-btn {
+  top: 5px;
+  right: 5px;
+}
   .programa-modal-container {
     flex-direction: column;
     max-height: 95vh;
