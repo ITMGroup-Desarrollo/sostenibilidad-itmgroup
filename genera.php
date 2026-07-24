@@ -41,6 +41,13 @@ if (!function_exists('render_svg')) {
         $filepath = __DIR__ . '/' . $folder . '/' . $filename;
         if (file_exists($filepath)) {
             $svg = file_get_contents($filepath);
+            
+            // Scope generic classes to prevent style collisions between multiple inline SVGs
+            $unique_prefix = 's' . substr(md5($folder . '/' . $filename), 0, 8) . '-';
+            
+            // Rewrite all class references inside styles (.cls-1) and attributes (class="cls-1")
+            $svg = preg_replace('/(?<=[\s\'"\.])cls-([a-zA-Z0-9_-]+)\b/', $unique_prefix . 'cls-$1', $svg);
+            
             if ($class) {
                 $svg = str_replace('<svg ', '<svg class="' . htmlspecialchars($class) . '" ', $svg);
             }
@@ -1349,11 +1356,11 @@ body {
   display: flex;
   align-items: center;
   margin-top: auto;
-  height: 48px;
+  height: 120px;
 }
 
 .modal-details-logo svg {
-  height: 48px;
+  height: 120px;
   width: auto;
   max-width: 100%;
   display: block;
@@ -1448,10 +1455,10 @@ body {
     margin-bottom: 20px;
   }
   .modal-details-logo {
-    height: 40px;
+    height: 80px;
   }
   .modal-details-logo svg {
-    height: 40px;
+    height: 80px;
   }
   .programa-modal-sidebar {
     height: 80px;
@@ -1510,7 +1517,7 @@ body {
             <div class="genera-pilar-card pilar-prosperidad">
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Beach cleaning / local community work. Replace src with your local image: <?php echo $basePath; ?>pilar-prosperidad.png -->
-                    <img class="genera-pilar-img" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=600&auto=format&fit=crop" alt="Prosperidad económica">
+                    <img class="genera-pilar-img" src="desechos.webp" alt="Prosperidad económica">
                 </div>
                 <div class="genera-pilar-text-block">
                     <div class="pilar-icon-wrapper">
@@ -1536,7 +1543,7 @@ body {
                 </div>
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Woven artisan bags. Replace src with your local image: <?php echo $basePath; ?>pilar-comunidad.png -->
-                    <img class="genera-pilar-img" src="https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=600&auto=format&fit=crop" alt="Desarrollo comunitario">
+                    <img class="genera-pilar-img" src="amora.webp" alt="Desarrollo comunitario">
                 </div>
             </div>
 
@@ -1544,7 +1551,7 @@ body {
             <div class="genera-pilar-card pilar-oceano">
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Ocean scuba diving conservation. Replace src with your local image: <?php echo $basePath; ?>pilar-oceano.png -->
-                    <img class="genera-pilar-img" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=600&auto=format&fit=crop" alt="Protección del océano">
+                    <img class="genera-pilar-img" src="arrecife.webp" alt="Protección del océano">
                 </div>
                 <div class="genera-pilar-text-block">
                     <div class="pilar-icon-wrapper">
@@ -2222,7 +2229,7 @@ body {
                     </div>
                     <div class="modal-details">
                         <div>
-                            <h3 class="modal-details-title">Comité Local de Gobernanza para el Turismo Sostenible en Samaná</h3>
+                            <h3 class="modal-details-title">Comité Local de Gobernanza para el Turismo Sostenible en&nbsp;Samaná</h3>
                             <p class="modal-details-text">
                                 Fortalecemos la <strong>gobernanza portuaria</strong> al articular el diálogo entre actores locales para impulsar decisiones conjuntas que favorezcan la <strong>prosperidad económica, la protección del océano y el desarrollo comunitario</strong> en Samaná.
                             </p>
