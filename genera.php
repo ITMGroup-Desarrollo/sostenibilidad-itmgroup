@@ -80,6 +80,7 @@ if (!function_exists('render_svg')) {
 body {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 .genera-container {
   font-family: var(--font-family);
@@ -90,6 +91,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .genera-container * {
@@ -1093,14 +1095,10 @@ body {
 }
 /* FULL-WIDTH VIDEO BANNER (BETWEEN SECTION 4 & SECTION 5) */
 .genera-video-banner {
-  width: 100vw;
+  width: 100%;
   height: 95dvh;
   max-height: 95dvh;
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
   overflow: hidden;
   line-height: 0;
   background-color: #000;
@@ -2033,7 +2031,7 @@ body {
                 <!-- Card 1: Distintivo Puertos de Cruceros -->
                 <div class="programa-card-wrapper">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-bg" style="background-image: url('programas/modal/distintivo-puertos/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('distintivo-puertos-cruceros.svg', '', 'programas'); ?>
@@ -2045,7 +2043,7 @@ body {
                 <!-- Card 2: Puertos y Comunidades circulares -->
                 <div class="programa-card-wrapper">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1530521954074-e64f6810b32d?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-bg" style="background-image: url('programas/modal/puertos-comunidades/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('puertos-comunidades-circulares.svg', '', 'programas'); ?>
@@ -2057,7 +2055,7 @@ body {
                 <!-- Card 3: Amora -->
                 <div class="programa-card-wrapper">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-bg" style="background-image: url('programas/modal/amora/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('amora.svg', '', 'programas'); ?>
@@ -2069,7 +2067,7 @@ body {
                 <!-- Card 4: Comité Local de Gobernanza -->
                 <div class="programa-card-wrapper">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-bg" style="background-image: url('programas/modal/comite-local/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('comite-gobernanza-samana.svg', '', 'programas'); ?>
@@ -2081,7 +2079,7 @@ body {
                 <!-- Card 5: Centros Comunitarios -->
                 <div class="programa-card-wrapper">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-bg" style="background-image: url('programas/modal/centros-comunitarios/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('centros-comunitarios-wayak.svg', '', 'programas'); ?>
@@ -2093,7 +2091,7 @@ body {
                 <!-- Card 6: Tours Comunitarios -->
                 <div class="programa-card-wrapper">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="programa-card-bg" style="background-image: url('programas/modal/tours/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('tours-comunitarios.svg', '', 'programas'); ?>
