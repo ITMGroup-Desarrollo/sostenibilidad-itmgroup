@@ -1470,6 +1470,123 @@ body {
   }
 }
 
+/* --- SCROLL REVEAL & INTERACTION IMPROVEMENTS --- */
+.reveal-on-scroll {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 1.0s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal-fade-up {
+  transform: translateY(40px);
+}
+
+.reveal-fade-left {
+  transform: translateX(-40px);
+}
+
+.reveal-fade-right {
+  transform: translateX(40px);
+}
+
+.reveal-scale-in {
+  transform: scale(0.95);
+}
+
+.reveal-active {
+  opacity: 1 !important;
+  transform: translate(0) scale(1) !important;
+}
+
+/* Floating Shapes for Parallax Background */
+.floating-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform;
+}
+
+.shape-orange {
+  background: radial-gradient(circle, var(--accent-orange) 0%, transparent 70%);
+  width: 350px;
+  height: 350px;
+}
+
+.shape-pink {
+  background: radial-gradient(circle, var(--accent-pink) 0%, transparent 70%);
+  width: 300px;
+  height: 300px;
+}
+
+.shape-blue {
+  background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
+  width: 400px;
+  height: 400px;
+}
+
+/* Custom adjustments for sections with overflow and shapes */
+.genera-fundacion, .genera-pilares, .genera-objetivos, .genera-programas {
+  overflow: hidden; /* Prevent shapes from causing horizontal scroll */
+  position: relative;
+}
+
+.genera-fundacion-grid,
+.genera-pilares-grid,
+.genera-objetivos-wrapper,
+.genera-programas-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hero parallax hardware acceleration */
+.genera-hero-content {
+  will-change: transform, opacity;
+}
+
+/* Enhanced interactive transitions */
+.genera-pilar-card, .ods-card, .programa-card {
+  will-change: transform, box-shadow;
+}
+
+/* Glow states for cards in hover */
+.pilar-prosperidad:hover {
+  box-shadow: 0 20px 40px rgba(236, 136, 44, 0.18) !important;
+}
+.pilar-desarrollo:hover {
+  box-shadow: 0 20px 40px rgba(214, 0, 108, 0.18) !important;
+}
+.pilar-oceano:hover {
+  box-shadow: 0 20px 40px rgba(27, 166, 210, 0.18) !important;
+}
+
+.programa-card-wrapper {
+  will-change: transform;
+  transition: transform 0.3s ease;
+}
+
+/* Rueda de Gobernanza micro-rotation */
+.genera-wheel-wrapper {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.genera-wheel-wrapper.reveal-active svg {
+  animation: wheelIntro 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes wheelIntro {
+  0% {
+    transform: rotate(-60deg) scale(0.8);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
 </style>
 
 <div class="genera-container">
@@ -1485,18 +1602,21 @@ body {
 
     <!-- SECTION 2: FUNDACIÓN & GOBERNANZA -->
     <section class="genera-fundacion">
+        <!-- Floating shape for parallax background -->
+        <div class="floating-shape shape-orange" style="top: 15%; right: -100px;" data-speed="-0.1"></div>
+        
         <div class="genera-fundacion-grid">
-            <div class="genera-fundacion-info">
-                <h2 class="genera-fundacion-title">Fundación<br>Genera ITM</h2>
-                <p class="genera-fundacion-text">
+            <div class="genera-fundacion-info reveal-stagger">
+                <h2 class="genera-fundacion-title reveal-on-scroll reveal-fade-left">Fundación<br>Genera ITM</h2>
+                <p class="genera-fundacion-text reveal-on-scroll reveal-fade-left">
                     Somos una organización sin fines de lucro que impulsa el bienestar de las comunidades portuarias a través de programas basados en la gobernanza participativa, el turismo sostenible, la prosperidad local y el cuidado del entorno marino y costero.
                 </p>
-                <p class="genera-fundacion-text highlight">
+                <p class="genera-fundacion-text highlight reveal-on-scroll reveal-fade-left">
                     Nuestras acciones se rigen a través de 3 pilares fundamentales: <strong>Prosperidad económica, Desarrollo comunitario y Protección del océano.</strong>
                 </p>
             </div>
             <div class="genera-fundacion-wheel-col">
-                <div class="genera-wheel-wrapper">
+                <div class="genera-wheel-wrapper reveal-on-scroll reveal-scale-in">
                     <?php 
                     $govSvg = __DIR__ . '/gobernanza.svg';
                     if (file_exists($govSvg)) {
@@ -1510,9 +1630,13 @@ body {
 
     <!-- SECTION 3: TARJETAS DE PILARES -->
     <section class="genera-pilares">
-        <div class="genera-pilares-grid">
+        <!-- Floating shapes for parallax background -->
+        <div class="floating-shape shape-pink" style="bottom: 15%; left: -80px;" data-speed="0.08"></div>
+        <div class="floating-shape shape-blue" style="top: 10%; right: -80px;" data-speed="-0.08"></div>
+        
+        <div class="genera-pilares-grid reveal-stagger">
             <!-- Pilar 1: Prosperidad Económica -->
-            <div class="genera-pilar-card pilar-prosperidad">
+            <div class="genera-pilar-card pilar-prosperidad reveal-on-scroll reveal-fade-up">
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Beach cleaning / local community work. Replace src with your local image: <?php echo $basePath; ?>pilar-prosperidad.png -->
                     <img class="genera-pilar-img" src="desechos.webp" alt="Prosperidad económica">
@@ -1529,7 +1653,7 @@ body {
             </div>
 
             <!-- Pilar 2: Desarrollo Comunitario (Staggered Layout: Text on top, Image at bottom) -->
-            <div class="genera-pilar-card pilar-desarrollo">
+            <div class="genera-pilar-card pilar-desarrollo reveal-on-scroll reveal-fade-up">
                 <div class="genera-pilar-text-block">
                     <div class="pilar-icon-wrapper">
                         <?php render_svg('desarrollo-comunitario.svg', 'pilar-svg-icon', 'objetivos'); ?>
@@ -1546,7 +1670,7 @@ body {
             </div>
 
             <!-- Pilar 3: Protección del Océano -->
-            <div class="genera-pilar-card pilar-oceano">
+            <div class="genera-pilar-card pilar-oceano reveal-on-scroll reveal-fade-up">
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Ocean scuba diving conservation. Replace src with your local image: <?php echo $basePath; ?>pilar-oceano.png -->
                     <img class="genera-pilar-img" src="arrecife.webp" alt="Protección del océano">
@@ -1566,16 +1690,19 @@ body {
 
     <!-- SECTION 4: OBJETIVOS ODS -->
     <section class="genera-objetivos">
+        <!-- Floating shape for parallax background -->
+        <div class="floating-shape shape-orange" style="top: 20%; left: -100px;" data-speed="0.08"></div>
+        
         <div class="genera-objetivos-wrapper">
-            <h2 class="genera-objetivos-title">
+            <h2 class="genera-objetivos-title reveal-on-scroll reveal-fade-up">
                 Nuestras líneas de acción tienen su base en los Objetivos de Desarrollo Sostenible de la Organización de las Naciones&nbsp;Unidas.
             </h2>
             
             <div class="genera-objetivos-grid">
                 <!-- Left: Grid of 4 Cards -->
-                <div class="ods-cards-grid">
+                <div class="ods-cards-grid reveal-stagger">
                     <!-- Card 1: 8 & 11 (Prosperidad) -->
-                    <div class="ods-card" data-group="prosperidad">
+                    <div class="ods-card reveal-on-scroll reveal-fade-up" data-group="prosperidad">
                         <div class="ods-card-content">
                             <div class="ods-icon-wrapper">
                                 <?php render_svg('ods-08-trabajo-decente.svg', 'ods-svg-icon icon-8'); ?>
@@ -1588,7 +1715,7 @@ body {
                     </div>
 
                     <!-- Card 2: 5 & 10 (Desarrollo) -->
-                    <div class="ods-card" data-group="comunitario">
+                    <div class="ods-card reveal-on-scroll reveal-fade-up" data-group="comunitario">
                         <div class="ods-card-content">
                             <div class="ods-icon-wrapper">
                                 <?php render_svg('ods-05-igualdad-genero.svg', 'ods-svg-icon icon-5'); ?>
@@ -1601,7 +1728,7 @@ body {
                     </div>
 
                     <!-- Card 3: 12 & 14 (Oceano) -->
-                    <div class="ods-card" data-group="oceano">
+                    <div class="ods-card reveal-on-scroll reveal-fade-up" data-group="oceano">
                         <div class="ods-card-content">
                             <div class="ods-icon-wrapper">
                                 <?php render_svg('ods-12-produccion-consumo-responsable.svg', 'ods-svg-icon icon-12'); ?>
@@ -1614,7 +1741,7 @@ body {
                     </div>
 
                     <!-- Card 4: 16 & 17 (Todos) -->
-                    <div class="ods-card" data-group="todos">
+                    <div class="ods-card reveal-on-scroll reveal-fade-up" data-group="todos">
                         <div class="ods-card-content">
                             <div class="ods-icon-wrapper">
                                 <?php render_svg('ods-16-paz-justicia.svg', 'ods-svg-icon icon-16'); ?>
@@ -1632,7 +1759,7 @@ body {
                 </div>
 
                 <!-- Right: Pillars Status List -->
-                <div class="pillars-col">
+                <div class="pillars-col reveal-on-scroll reveal-fade-right">
                     <div class="pillar-item" data-pillar="prosperidad">
                         <div class="pillar-circle">
                             <?php render_svg('prosperidad-economica.svg', 'svg-pillar'); ?>
@@ -1655,7 +1782,7 @@ body {
             </div>
 
             <!-- Footer: ODS Logo -->
-            <div class="ods-footer">
+            <div class="ods-footer reveal-on-scroll reveal-fade-up">
                 <img src="<?php echo $basePath; ?>objetivos/logo-ods.png" alt="Objetivos de Desarrollo Sostenible" class="ods-footer-logo">
             </div>
         </div>
@@ -1663,11 +1790,81 @@ body {
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // --- NEW: STAGGER DELAYS FOR GRID CONTAINERS ---
+        document.querySelectorAll('.reveal-stagger').forEach(grid => {
+            const children = grid.querySelectorAll('.reveal-on-scroll');
+            children.forEach((child, idx) => {
+                child.style.transitionDelay = `${idx * 0.15}s`;
+            });
+        });
+
+        // --- NEW: INTERSECTION OBSERVER FOR SCROLL REVEAL ---
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // --- NEW: PERFORMANCE-OPTIMIZED PARALLAX EFFECT ---
+        let lastScrollY = window.pageYOffset;
+        let ticking = false;
+        const heroContent = document.querySelector('.genera-hero-content');
+        const heroSection = document.querySelector('.genera-hero');
+        const floatingShapes = document.querySelectorAll('.floating-shape');
+
+        function updateParallax(scrollY) {
+            if (heroContent && heroSection) {
+                const heroHeight = heroSection.offsetHeight;
+                if (scrollY <= heroHeight) {
+                    const progress = scrollY / heroHeight;
+                    heroContent.style.transform = `translateY(${scrollY * 0.35}px)`;
+                    heroContent.style.opacity = Math.max(0, 1 - progress * 1.3);
+                }
+            }
+
+            floatingShapes.forEach(shape => {
+                const parent = shape.parentElement;
+                const rect = parent.getBoundingClientRect();
+                const speed = parseFloat(shape.dataset.speed) || 0.1;
+                
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const relativeScroll = window.innerHeight - rect.top;
+                    shape.style.transform = `translateY(${relativeScroll * speed}px)`;
+                }
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.pageYOffset;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateParallax(lastScrollY);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Run once on load to position shapes and contents correctly
+        updateParallax(window.pageYOffset);
+
+        // --- ORIGINAL INTERACTIVE LOGIC ---
         const cards = document.querySelectorAll('.ods-card');
         const pillars = document.querySelectorAll('.pillar-item');
 
         function selectGroup(group) {
-            // Set active card
             cards.forEach(card => {
                 if (card.dataset.group === group) {
                     card.classList.add('active');
@@ -1678,7 +1875,6 @@ body {
                 }
             });
 
-            // Set active pillars on the right
             pillars.forEach(pillar => {
                 const pType = pillar.dataset.pillar;
                 let shouldBeActive = false;
@@ -1690,7 +1886,7 @@ body {
                 } else if (group === 'oceano' && pType === 'oceano') {
                     shouldBeActive = true;
                 } else if (group === 'todos') {
-                    shouldBeActive = true; // All three active
+                    shouldBeActive = true;
                 }
 
                 if (shouldBeActive) {
@@ -1704,24 +1900,20 @@ body {
         const pillarsCol = document.querySelector('.pillars-col');
         const odsCardsGrid = document.querySelector('.ods-cards-grid');
 
-        // Add click listeners to cards
         cards.forEach(card => {
             card.addEventListener('click', () => {
                 selectGroup(card.dataset.group);
 
-                // Mobile auto-scroll down to pillars column
                 if (window.innerWidth <= 991 && pillarsCol) {
                     pillarsCol.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             });
         });
 
-        // Add click listeners to pillars (right SVGs/logos)
         pillars.forEach(pillar => {
             pillar.addEventListener('click', () => {
                 selectGroup(pillar.dataset.pillar);
 
-                // Mobile auto-scroll up to the illuminated card
                 if (window.innerWidth <= 991) {
                     const targetGroup = pillar.dataset.pillar;
                     const targetCard = Array.from(cards).find(c => c.dataset.group === targetGroup);
@@ -1734,18 +1926,16 @@ body {
             });
         });
 
-        // Select the first group (8 & 11) by default on load
         selectGroup('prosperidad');
 
-        // GOBERNANZA WHEEL INTERACTIVITY
-        const segProsperidad = document.getElementById('Capa_6'); // Segment Prosperidad (Orange)
-        const segComunitario = document.getElementById('Capa_3'); // Segment Comunitario (Pink)
-        const segOceano = document.getElementById('Capa_4');     // Segment Oceano (Blue)
-        const centerCircle = document.getElementById('Capa_8');  // Center Circle (Gobernanza)
+        const segProsperidad = document.getElementById('Capa_6');
+        const segComunitario = document.getElementById('Capa_3');
+        const segOceano = document.getElementById('Capa_4');
+        const centerCircle = document.getElementById('Capa_8');
 
-        const iconProsperidad = document.getElementById('Capa_7'); // Icon Prosperidad (Orange)
-        const iconComunitario = document.getElementById('Capa_2'); // Icon Comunitario (Pink)
-        const iconOceano = document.getElementById('Capa_5');     // Icon Oceano (Blue)
+        const iconProsperidad = document.getElementById('Capa_7');
+        const iconComunitario = document.getElementById('Capa_2');
+        const iconOceano = document.getElementById('Capa_5');
 
         if (segProsperidad && segComunitario && segOceano && centerCircle) {
             segProsperidad.classList.add('gobernanza-segment');
@@ -1756,7 +1946,6 @@ body {
             if (iconComunitario) iconComunitario.classList.add('gobernanza-icon');
             if (iconOceano) iconOceano.classList.add('gobernanza-icon');
 
-            // Initial state: Prosperidad segment + Prosperidad icon active at load
             setActiveSegment(segProsperidad, iconProsperidad);
 
             function setActiveSegment(activeSeg, activeIcon) {
@@ -1778,7 +1967,6 @@ body {
                 centerCircle.classList.add('active');
             }
 
-            // Reference the pilar cards
             const cardProsperidad = document.querySelector('.genera-pilar-card.pilar-prosperidad');
             const cardDesarrollo = document.querySelector('.genera-pilar-card.pilar-desarrollo');
             const cardOceano = document.querySelector('.genera-pilar-card.pilar-oceano');
@@ -1819,7 +2007,6 @@ body {
                 focusCard(null);
             });
 
-            // Click handlers for cards directly to light them up
             [cardProsperidad, cardDesarrollo, cardOceano].forEach(card => {
                 if (card) {
                     card.addEventListener('click', () => {
@@ -1835,7 +2022,6 @@ body {
                 }
             });
 
-            // Click outside to clear focus
             document.addEventListener('click', (e) => {
                 const clickedWheel = e.target.closest('.genera-wheel-wrapper');
                 const clickedCard = e.target.closest('.genera-pilar-card');
@@ -1845,7 +2031,6 @@ body {
             });
         }
 
-        // PROGRAMS MODAL INTERACTIVITY
         const modal = document.getElementById('programaModal');
         const closeModalBtn = document.getElementById('closeModal');
         const mainProgramCards = document.querySelectorAll('.genera-programas .programa-card');
@@ -1859,7 +2044,6 @@ body {
         let galleryInterval = null;
 
         function startAutoGallery(tabIndex) {
-            // Clear existing gallery interval
             if (galleryInterval) {
                 clearInterval(galleryInterval);
             }
@@ -1873,7 +2057,6 @@ body {
             
             let currentSlide = 0;
             
-            // Set up pagination dots click handlers
             dots.forEach((dot, dotIdx) => {
                 dot.onclick = (e) => {
                     e.stopPropagation();
@@ -1890,7 +2073,6 @@ body {
                 dots[currentSlide].classList.add('active');
             }
             
-            // Auto advance slide every 4 seconds
             galleryInterval = setInterval(() => {
                 let nextSlide = (currentSlide + 1) % slides.length;
                 goToSlide(nextSlide);
@@ -1902,12 +2084,10 @@ body {
             const activeIndex = index;
             const nextIndex = (index + 1) % 6;
             
-            // Helper to populate a slot with a card clone
             function populateSlot(slotElement, targetIndex) {
                 slotElement.innerHTML = '';
                 const cardClone = mainProgramCards[targetIndex].cloneNode(true);
                 
-                // Set click handler on clone
                 cardClone.addEventListener('click', (e) => {
                     e.preventDefault();
                     showProgram(targetIndex);
@@ -1924,7 +2104,6 @@ body {
         function showProgram(index) {
             currentProgramIndex = index;
             
-            // Show correct content tab
             tabContents.forEach(tab => {
                 if (parseInt(tab.dataset.programIndex) === index) {
                     tab.classList.add('active');
@@ -1933,7 +2112,6 @@ body {
                 }
             });
             
-            // Reset active slides inside the active tab
             const activeTab = document.querySelector(`.modal-tab-content[data-program-index="${index}"]`);
             if (activeTab) {
                 const slides = activeTab.querySelectorAll('.modal-slide');
@@ -1948,52 +2126,44 @@ body {
                 });
             }
             
-            // Populate previous, active, next mini-cards on the right
             updateSidebar(index);
-            
-            // Start slideshow timer
             startAutoGallery(index);
         }
 
         function openModal(index) {
             showProgram(index);
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Lock scroll
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             modal.classList.remove('active');
-            document.body.style.overflow = ''; // Unlock scroll
+            document.body.style.overflow = '';
             if (galleryInterval) {
                 clearInterval(galleryInterval);
             }
         }
 
-        // Add click events to main page program cards
         mainProgramCards.forEach((card, index) => {
             card.addEventListener('click', () => {
                 openModal(index);
             });
         });
 
-        // Close button click
         closeModalBtn.addEventListener('click', closeModal);
 
-        // Click outside modal box to close
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closeModal();
             }
         });
 
-        // Close on ESC key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.classList.contains('active')) {
                 closeModal();
             }
         });
 
-        // VIDEO BANNER INTERACTIVITY
         const videoElement = document.getElementById('generaFundacionVideo');
         const videoOverlay = document.getElementById('generaVideoOverlay');
 
@@ -2024,12 +2194,16 @@ body {
     </section>
     <!-- SECTION 5: PROGRAMAS EMBLEMA -->
     <section class="genera-programas">
+        <!-- Floating shapes for parallax background -->
+        <div class="floating-shape shape-blue" style="bottom: 10%; right: -120px;" data-speed="-0.1"></div>
+        <div class="floating-shape shape-pink" style="top: 5%; left: -60px;" data-speed="0.08"></div>
+        
         <div class="genera-programas-wrapper">
-            <h2 class="genera-programas-title">Conoce nuestros programas emblema</h2>
+            <h2 class="genera-programas-title reveal-on-scroll reveal-fade-up">Conoce nuestros programas emblema</h2>
             
-            <div class="programas-grid">
+            <div class="programas-grid reveal-stagger">
                 <!-- Card 1: Distintivo Puertos de Cruceros -->
-                <div class="programa-card-wrapper">
+                <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
                         <div class="programa-card-bg" style="background-image: url('programas/modal/distintivo-puertos/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
@@ -2041,7 +2215,7 @@ body {
                 </div>
 
                 <!-- Card 2: Puertos y Comunidades circulares -->
-                <div class="programa-card-wrapper">
+                <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
                         <div class="programa-card-bg" style="background-image: url('programas/modal/puertos-comunidades/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
@@ -2053,7 +2227,7 @@ body {
                 </div>
 
                 <!-- Card 3: Amora -->
-                <div class="programa-card-wrapper">
+                <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
                         <div class="programa-card-bg" style="background-image: url('programas/modal/amora/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
@@ -2065,7 +2239,7 @@ body {
                 </div>
 
                 <!-- Card 4: Comité Local de Gobernanza -->
-                <div class="programa-card-wrapper">
+                <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
                         <div class="programa-card-bg" style="background-image: url('programas/modal/comite-local/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
@@ -2077,7 +2251,7 @@ body {
                 </div>
 
                 <!-- Card 5: Centros Comunitarios -->
-                <div class="programa-card-wrapper">
+                <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
                         <div class="programa-card-bg" style="background-image: url('programas/modal/centros-comunitarios/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
@@ -2089,7 +2263,7 @@ body {
                 </div>
 
                 <!-- Card 6: Tours Comunitarios -->
-                <div class="programa-card-wrapper">
+                <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
                         <div class="programa-card-bg" style="background-image: url('programas/modal/tours/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
@@ -2102,7 +2276,7 @@ body {
             </div>
 
             <!-- Footer: Cancun Center Logo & Text -->
-            <div class="programas-footer">
+            <div class="programas-footer reveal-on-scroll reveal-fade-up">
                 <a href="https://www.instagram.com/fundacioncancuncenter/" target="_blank" rel="noopener noreferrer" class="instagram-link">
                     <div class="cancun-center-logo">
                         <?php render_svg('logo-fundacion-cancun-center.svg', '', 'programas'); ?>
