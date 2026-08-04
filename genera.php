@@ -1587,6 +1587,22 @@ body {
     transform: rotate(0deg) scale(1);
   }
 }
+
+/* Heartbeat for inactive ODS cards */
+.pulse-inactive {
+  animation: odsHeartbeat 0.6s ease-in-out;
+  animation-iteration-count: 3;
+}
+
+@keyframes odsHeartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 15px 30px rgba(12, 35, 64, 0.08);
+  }
+}
 </style>
 
 <div class="genera-container">
@@ -1808,6 +1824,21 @@ body {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('reveal-active');
+                    
+                    // Trigger wheel lighting sequence when it becomes visible
+                    if (entry.target.classList.contains('genera-wheel-wrapper')) {
+                        if (typeof window.startWheelSequence === 'function') {
+                            window.startWheelSequence();
+                        }
+                    }
+                    
+                    // Trigger ODS cards heartbeat sequence when they enter the viewport
+                    if (entry.target.classList.contains('ods-cards-grid')) {
+                        if (typeof window.startODSHeartbeat === 'function') {
+                            window.startODSHeartbeat();
+                        }
+                    }
+                    
                     observer.unobserve(entry.target);
                 }
             });
@@ -1816,6 +1847,12 @@ body {
         document.querySelectorAll('.reveal-on-scroll').forEach(el => {
             revealObserver.observe(el);
         });
+
+        // Also observe the ODS grid to trigger its pulse anim
+        const odsGridEl = document.querySelector('.ods-cards-grid');
+        if (odsGridEl) {
+            revealObserver.observe(odsGridEl);
+        }
 
         // --- NEW: PERFORMANCE-OPTIMIZED PARALLAX EFFECT ---
         let lastScrollY = window.pageYOffset;
@@ -1900,6 +1937,24 @@ body {
         const pillarsCol = document.querySelector('.pillars-col');
         const odsCardsGrid = document.querySelector('.ods-cards-grid');
 
+        // Heartbeat pulse animation for the inactive ODS cards
+        window.startODSHeartbeat = function() {
+            // Wait 1.5s for the stagger entrance animation to fully complete
+            setTimeout(() => {
+                const inactiveCards = document.querySelectorAll('.ods-card.inactive');
+                inactiveCards.forEach(card => {
+                    card.classList.add('pulse-inactive');
+                });
+                
+                // Remove the class after the 3 heartbeat iterations (0.6s * 3 = 1.8s)
+                setTimeout(() => {
+                    inactiveCards.forEach(card => {
+                        card.classList.remove('pulse-inactive');
+                    });
+                }, 1800);
+            }, 1500);
+        };
+
         cards.forEach(card => {
             card.addEventListener('click', () => {
                 selectGroup(card.dataset.group);
@@ -1946,14 +2001,21 @@ body {
             if (iconComunitario) iconComunitario.classList.add('gobernanza-icon');
             if (iconOceano) iconOceano.classList.add('gobernanza-icon');
 
-            setActiveSegment(segProsperidad, iconProsperidad);
+            let autoSequenceTimeout1 = null;
+            let autoSequenceTimeout2 = null;
+            let autoSequenceTimeout3 = null;
+            let sequenceStarted = false;
 
-            function setActiveSegment(activeSeg, activeIcon) {
+            function clearActiveSegments() {
                 [segProsperidad, segComunitario, segOceano].forEach(s => s.classList.remove('active'));
                 [iconProsperidad, iconComunitario, iconOceano].forEach(i => {
                     if (i) i.classList.remove('active');
                 });
                 centerCircle.classList.remove('active');
+            }
+
+            function setActiveSegment(activeSeg, activeIcon) {
+                clearActiveSegments();
 
                 if (activeSeg) activeSeg.classList.add('active');
                 if (activeIcon) activeIcon.classList.add('active');
@@ -1980,7 +2042,39 @@ body {
                 }
             }
 
+            window.startWheelSequence = function() {
+                if (sequenceStarted) return;
+                sequenceStarted = true;
+
+                // Ensure initial state is cleared (grey)
+                clearActiveSegments();
+
+                // Wait 1.8s (duration of rotation CSS animation) before starting highlights
+                autoSequenceTimeout1 = setTimeout(() => {
+                    // Step 1: Desarrollo Comunitario (Pink)
+                    setActiveSegment(segComunitario, iconComunitario);
+                    
+                    autoSequenceTimeout2 = setTimeout(() => {
+                        // Step 2: Protección del Océano (Blue)
+                        setActiveSegment(segOceano, iconOceano);
+                        
+                        autoSequenceTimeout3 = setTimeout(() => {
+                            // Step 3: Prosperidad Económica (Orange) & focus its card
+                            setActiveSegment(segProsperidad, iconProsperidad);
+                            focusCard(cardProsperidad);
+                        }, 600);
+                    }, 600);
+                }, 900);
+            };
+
+            window.cancelAutoSequence = function() {
+                if (autoSequenceTimeout1) clearTimeout(autoSequenceTimeout1);
+                if (autoSequenceTimeout2) clearTimeout(autoSequenceTimeout2);
+                if (autoSequenceTimeout3) clearTimeout(autoSequenceTimeout3);
+            };
+
             segProsperidad.addEventListener('click', () => {
+                if (window.cancelAutoSequence) window.cancelAutoSequence();
                 setActiveSegment(segProsperidad, iconProsperidad);
                 focusCard(cardProsperidad);
                 if (cardProsperidad) {
@@ -1988,6 +2082,7 @@ body {
                 }
             });
             segComunitario.addEventListener('click', () => {
+                if (window.cancelAutoSequence) window.cancelAutoSequence();
                 setActiveSegment(segComunitario, iconComunitario);
                 focusCard(cardDesarrollo);
                 if (cardDesarrollo) {
@@ -1995,6 +2090,7 @@ body {
                 }
             });
             segOceano.addEventListener('click', () => {
+                if (window.cancelAutoSequence) window.cancelAutoSequence();
                 setActiveSegment(segOceano, iconOceano);
                 focusCard(cardOceano);
                 if (cardOceano) {
@@ -2003,6 +2099,7 @@ body {
             });
 
             centerCircle.addEventListener('click', () => {
+                if (window.cancelAutoSequence) window.cancelAutoSequence();
                 activateAll();
                 focusCard(null);
             });
@@ -2010,6 +2107,7 @@ body {
             [cardProsperidad, cardDesarrollo, cardOceano].forEach(card => {
                 if (card) {
                     card.addEventListener('click', () => {
+                        if (window.cancelAutoSequence) window.cancelAutoSequence();
                         focusCard(card);
                         if (card === cardProsperidad) {
                             setActiveSegment(segProsperidad, iconProsperidad);
