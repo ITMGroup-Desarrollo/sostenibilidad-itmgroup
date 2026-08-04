@@ -289,15 +289,15 @@ body {
   transform: scale(1.1);
 }
 
-#Capa_6:hover .st5, #Capa_6.active .st5 {
+#Capa_6:hover .st5, #Capa_6.active .st5, .genera-wheel-wrapper:has(#Capa_8:hover) #Capa_6 .st5 {
   fill: #f1992a !important;
 }
 
-#Capa_3:hover .st1, #Capa_3.active .st1 {
+#Capa_3:hover .st1, #Capa_3.active .st1, .genera-wheel-wrapper:has(#Capa_8:hover) #Capa_3 .st1 {
   fill: #dc1680 !important;
 }
 
-#Capa_4:hover .st4, #Capa_4.active .st4 {
+#Capa_4:hover .st4, #Capa_4.active .st4, .genera-wheel-wrapper:has(#Capa_8:hover) #Capa_4 .st4 {
   fill: #10acd7 !important;
 }
 
@@ -309,6 +309,13 @@ body {
   fill: #662483 !important;
 }
 
+/* Hover triggering sibling outer icons or center hover triggering all */
+.genera-wheel-wrapper:has(#Capa_6:hover) #Capa_7,
+.genera-wheel-wrapper:has(#Capa_3:hover) #Capa_2,
+.genera-wheel-wrapper:has(#Capa_4:hover) #Capa_5,
+.genera-wheel-wrapper:has(#Capa_8:hover) #Capa_7,
+.genera-wheel-wrapper:has(#Capa_8:hover) #Capa_2,
+.genera-wheel-wrapper:has(#Capa_8:hover) #Capa_5,
 .gobernanza-icon.active {
   opacity: 1 !important;
   pointer-events: auto !important;
