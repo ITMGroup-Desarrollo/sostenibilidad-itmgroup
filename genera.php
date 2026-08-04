@@ -1599,8 +1599,8 @@ body {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.03);
-    box-shadow: 0 15px 30px rgba(12, 35, 64, 0.08);
+    transform: scale(1.1);
+    box-shadow: 0 20px 40px rgba(12, 35, 64, 0.12);
   }
 }
 </style>
