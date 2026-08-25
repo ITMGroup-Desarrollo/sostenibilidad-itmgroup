@@ -119,7 +119,7 @@ body {
   z-index: 10;
   color: var(--text-light);
   padding: 0 20px;
-  max-width: 900px;
+  max-width: 1100px;
   animation: fadeInUp 1.2s ease-out;
 }
 
@@ -129,7 +129,7 @@ body {
 }
 
 .genera-logo-img {
-  width: 26rem;
+  width: 30rem;
   max-width: 90vw;
   height: auto;
 }
@@ -138,6 +138,14 @@ body {
   font-size: 24px;
   font-weight: 400;
   max-width: 700px;
+  margin: 0 auto;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.01em;
+}
+.genera-hero-titletagline {
+  font-size: 32px;
+  font-weight: 400;
+  max-width: 1000px;
   margin: 0 auto;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
   letter-spacing: 0.01em;
@@ -165,11 +173,16 @@ body {
     min-height: 400px;
   }
   .genera-logo-img {
-    width: 18rem;
+    width: 21rem;
     max-width: 85vw;
   }
   .genera-hero-tagline {
     font-size: 18px !important;
+    line-height: 1.4;
+    padding: 0 10px;
+  }
+  .genera-hero-titletagline {
+    font-size: 24px !important;
     line-height: 1.4;
     padding: 0 10px;
   }
@@ -1619,7 +1632,8 @@ body {
             <div class="genera-hero-logo">
                 <img class="genera-logo-img" src="<?php echo $basePath; ?>logo-Genera.png" alt="">
             </div>
-            <p class="genera-hero-tagline">Impulsamos el desarrollo del turismo&nbsp;sostenible</p>
+            <h2 class="genera-hero-titletagline">UNA VISIÓN COMPARTIDA CON&nbsp;LA&nbsp;COMUNIDAD</h2>
+            <p class="genera-hero-tagline">Impulsamos el desarrollo sostenible a través de acciones y programas de&nbsp;alto&nbsp;impacto.</p>
         </div>
     </section>
 
