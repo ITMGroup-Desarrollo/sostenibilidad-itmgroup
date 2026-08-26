@@ -1655,8 +1655,8 @@ body {
             <div class="genera-hero-logo">
                 <img class="genera-logo-img" src="<?php echo $basePath; ?>logo-Genera.png" alt="">
             </div>
-            <h2 class="genera-hero-titletagline">UNA VISIÓN COMPARTIDA CON&nbsp;LA&nbsp;COMUNIDAD</h2>
-            <p class="genera-hero-tagline">Impulsamos el desarrollo sostenible a través de acciones y programas de&nbsp;alto&nbsp;impacto.</p>
+            <h2 class="genera-hero-titletagline">UNA&nbsp;VISIÓN&nbsp;COMPARTIDA</h2>
+            <p class="genera-hero-tagline">Impulsamos el desarrollo sostenible junto a&nbsp;la&nbsp;comunidad.</p>
         </div>
     </section>
 
