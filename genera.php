@@ -1697,7 +1697,7 @@ body {
             <div class="genera-pilar-card pilar-prosperidad reveal-on-scroll reveal-fade-up">
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Beach cleaning / local community work. Replace src with your local image: <?php echo $basePath; ?>pilar-prosperidad.png -->
-                    <img class="genera-pilar-img" src="desechos.webp" alt="Prosperidad económica">
+                    <img class="genera-pilar-img" src="amora.webp" alt="Prosperidad económica">
                 </div>
                 <div class="genera-pilar-text-block">
                     <div class="pilar-icon-wrapper">
@@ -1723,7 +1723,7 @@ body {
                 </div>
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Woven artisan bags. Replace src with your local image: <?php echo $basePath; ?>pilar-comunidad.png -->
-                    <img class="genera-pilar-img" src="amora.webp" alt="Desarrollo comunitario">
+                    <img class="genera-pilar-img" src="desechos.webp" alt="Desarrollo comunitario">
                 </div>
             </div>
 
