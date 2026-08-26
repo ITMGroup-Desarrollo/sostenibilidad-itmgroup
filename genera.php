@@ -31,6 +31,9 @@ if (function_exists('get_template_directory_uri')) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Genera</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
     <?php
@@ -81,9 +84,27 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    font-family: var(--font-family) !important;
 }
+.genera-container,
+.genera-container *,
+.genera-container button,
+.genera-container input,
+.genera-container select,
+.genera-container textarea,
+.genera-container h1,
+.genera-container h2,
+.genera-container h3,
+.genera-container h4,
+.genera-container h5,
+.genera-container h6,
+.genera-container p,
+.genera-container a,
+.genera-container span {
+  font-family: var(--font-family) !important;
+}
+
 .genera-container {
-  font-family: var(--font-family);
   color: var(--text-dark);
   background-color: var(--text-light);
   line-height: 1.6;
@@ -125,7 +146,7 @@ body {
 
 /* Logo Design */
 .genera-hero-logo {
-  margin-bottom: 25px;
+  margin-bottom: 50px;
 }
 
 .genera-logo-img {
@@ -135,15 +156,15 @@ body {
 }
 
 .genera-hero-tagline {
-  font-size: 24px;
-  font-weight: 400;
-  max-width: 700px;
+  font-size: 37px;
+  font-weight: 700;
+  max-width: 1000px;
   margin: 0 auto;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
   letter-spacing: 0.01em;
 }
 .genera-hero-titletagline {
-  font-size: 32px;
+  font-size: 37px;
   font-weight: 400;
   max-width: 1000px;
   margin: 0 auto;
@@ -166,7 +187,7 @@ body {
 /* Responsiveness */
 @media (max-width: 768px) {
   .genera-hero-logo {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
   .genera-hero {
     height: 80vh;
