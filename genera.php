@@ -1841,7 +1841,7 @@ body {
 
             <!-- Footer: ODS Logo -->
             <div class="ods-footer reveal-on-scroll reveal-fade-up">
-                <img src="<?php echo $basePath; ?>objetivos/logo-ods.png" alt="Objetivos de Desarrollo Sostenible" class="ods-footer-logo">
+                <img src="<?php echo $basePath; ?>objetivos/logo-ods.svg" alt="Objetivos de Desarrollo Sostenible" class="ods-footer-logo">
             </div>
         </div>
     </section>
