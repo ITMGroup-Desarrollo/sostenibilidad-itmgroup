@@ -158,6 +158,7 @@ body {
 .genera-hero-tagline {
   font-size: 37px;
   font-weight: 700;
+  line-height: 1.1;
   max-width: 1000px;
   margin: 0 auto;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
@@ -166,6 +167,7 @@ body {
 .genera-hero-titletagline {
   font-size: 37px;
   font-weight: 400;
+  line-height: 1.1;
   max-width: 1000px;
   margin: 0 auto;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
@@ -199,12 +201,12 @@ body {
   }
   .genera-hero-tagline {
     font-size: 18px !important;
-    line-height: 1.4;
+    line-height: 1.2;
     padding: 0 10px;
   }
   .genera-hero-titletagline {
     font-size: 24px !important;
-    line-height: 1.4;
+    line-height: 1.2;
     padding: 0 10px;
   }
 }
