@@ -15,18 +15,18 @@ if (function_exists('get_template_directory_uri')) {
 // Detectar si el entorno es local (localhost, 127.0.0.1 o ::1)
 $is_local = in_array($_SERVER['SERVER_NAME'], ['localhost', '127.0.0.1', '::1']);
 
-// Forzar idioma inglés en entorno local
-$lang = $is_local ? 'en' : (function_exists('Lang\\getLang') ? Lang\getLang() : 'en');
+// Forzar idioma inglés en entorno local, permitiendo testing mediante ?lang= en la URL
+$lang = isset($_GET['lang']) ? $_GET['lang'] : ($is_local ? 'en' : (function_exists('Lang\\getLang') ? Lang\getLang() : 'en'));
 
 // Detectar entorno para cargar cabecera
 if (function_exists('get_template_directory_uri')) {
-    $basePath = get_template_directory_uri() . '/assets/genera/';
+    $basePath = get_template_directory_uri() . '/assets/sostenibilidad/';
     get_header();
 } else {
     $basePath = './';
     ?>
     <!DOCTYPE html>
-    <html lang="es">
+    <html lang="<?php echo $lang; ?>">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1655,8 +1655,20 @@ body {
             <div class="genera-hero-logo">
                 <img class="genera-logo-img" src="<?php echo $basePath; ?>logo-Genera.png" alt="">
             </div>
-            <h2 class="genera-hero-titletagline">UNA&nbsp;VISIÓN&nbsp;COMPARTIDA</h2>
-            <p class="genera-hero-tagline">Impulsamos el desarrollo sostenible junto a&nbsp;la&nbsp;comunidad.</p>
+            <h2 class="genera-hero-titletagline">
+                <?php if ($lang === 'en'): ?>
+                    A&nbsp;SHARED&nbsp;VISION
+                <?php else: ?>
+                    UNA&nbsp;VISIÓN&nbsp;COMPARTIDA
+                <?php endif; ?>
+            </h2>
+            <p class="genera-hero-tagline">
+                <?php if ($lang === 'en'): ?>
+                    We promote sustainable development together with&nbsp;the&nbsp;community.
+                <?php else: ?>
+                    Impulsamos el desarrollo sostenible junto a&nbsp;la&nbsp;comunidad.
+                <?php endif; ?>
+            </p>
         </div>
     </section>
 
@@ -1667,12 +1679,26 @@ body {
         
         <div class="genera-fundacion-grid">
             <div class="genera-fundacion-info reveal-stagger">
-                <h2 class="genera-fundacion-title reveal-on-scroll reveal-fade-left">Fundación<br>Genera ITM</h2>
+                <h2 class="genera-fundacion-title reveal-on-scroll reveal-fade-left">
+                    <?php if ($lang === 'en'): ?>
+                        Fundacion<br>Genera ITM
+                    <?php else: ?>
+                        Fundación<br>Genera ITM
+                    <?php endif; ?>
+                </h2>
                 <p class="genera-fundacion-text reveal-on-scroll reveal-fade-left">
-                    Somos una organización sin fines de lucro que impulsa el bienestar de las comunidades portuarias a través de programas basados en la gobernanza participativa, el turismo sostenible, la prosperidad local y el cuidado del entorno marino y costero.
+                    <?php if ($lang === 'en'): ?>
+                        We are a nonprofit organization promoting the wellbeing of the communities where our ports are located through programs based on port governance, sustainable tourism, local prosperity, and the protection of the marine and coastal environment.
+                    <?php else: ?>
+                        Somos una organización sin fines de lucro que impulsa el bienestar de las comunidades portuarias a través de programas basados en la gobernanza participativa, el turismo sostenible, la prosperidad local y el cuidado del entorno marino y costero.
+                    <?php endif; ?>
                 </p>
                 <p class="genera-fundacion-text highlight reveal-on-scroll reveal-fade-left">
-                    Nuestras acciones se rigen a través de 3 pilares fundamentales: <strong>Prosperidad económica, Desarrollo comunitario y Protección del océano.</strong>
+                    <?php if ($lang === 'en'): ?>
+                        Our actions are guided by three fundamental pillars: <strong>economic prosperity, community development, and ocean protection.</strong>
+                    <?php else: ?>
+                        Nuestras acciones se rigen a través de 3 pilares fundamentales: <strong>Prosperidad económica, Desarrollo comunitario y Protección del océano.</strong>
+                    <?php endif; ?>
                 </p>
             </div>
             <div class="genera-fundacion-wheel-col">
@@ -1699,15 +1725,27 @@ body {
             <div class="genera-pilar-card pilar-prosperidad reveal-on-scroll reveal-fade-up">
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Beach cleaning / local community work. Replace src with your local image: <?php echo $basePath; ?>pilar-prosperidad.png -->
-                    <img class="genera-pilar-img" src="amora.webp" alt="Prosperidad económica">
+                    <img class="genera-pilar-img" src="<?php echo $basePath; ?>amora.webp" alt="<?php echo $lang === 'en' ? 'Economic prosperity' : 'Prosperidad económica'; ?>">
                 </div>
                 <div class="genera-pilar-text-block">
                     <div class="pilar-icon-wrapper">
                         <?php render_svg('prosperidad-economica.svg', 'pilar-svg-icon', 'objetivos'); ?>
                     </div>
                     <div class="pilar-text-content">
-                        <h3 class="genera-pilar-card-title">Prosperidad económica</h3>
-                        <p class="genera-pilar-card-description">Integramos talento local a la actividad turística para generar ingresos dignos y sostenibles.</p>
+                        <h3 class="genera-pilar-card-title">
+                            <?php if ($lang === 'en'): ?>
+                                Economic prosperity
+                            <?php else: ?>
+                                Prosperidad económica
+                            <?php endif; ?>
+                        </h3>
+                        <p class="genera-pilar-card-description">
+                            <?php if ($lang === 'en'): ?>
+                                We integrate local talent in the tourism activity in our ports to generate dignified and sustainable income.
+                            <?php else: ?>
+                                Integramos talento local a la actividad turística para generar ingresos dignos y sostenibles.
+                            <?php endif; ?>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1719,13 +1757,25 @@ body {
                         <?php render_svg('desarrollo-comunitario.svg', 'pilar-svg-icon', 'objetivos'); ?>
                     </div>
                     <div class="pilar-text-content">
-                        <h3 class="genera-pilar-card-title">Desarrollo comunitario</h3>
-                        <p class="genera-pilar-card-description">Fortalecemos el tejido social de la comunidad promoviendo la participación para lograr el bienestar colectivo.</p>
+                        <h3 class="genera-pilar-card-title">
+                            <?php if ($lang === 'en'): ?>
+                                Community development
+                            <?php else: ?>
+                                Desarrollo comunitario
+                            <?php endif; ?>
+                        </h3>
+                        <p class="genera-pilar-card-description">
+                            <?php if ($lang === 'en'): ?>
+                                We strengthen social networking with the community by encouraging participation in the collective wellbeing.
+                            <?php else: ?>
+                                Fortalecemos el tejido social de la comunidad promoviendo la participación para lograr el bienestar colectivo.
+                            <?php endif; ?>
+                        </p>
                     </div>
                 </div>
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Woven artisan bags. Replace src with your local image: <?php echo $basePath; ?>pilar-comunidad.png -->
-                    <img class="genera-pilar-img" src="desechos.webp" alt="Desarrollo comunitario">
+                    <img class="genera-pilar-img" src="<?php echo $basePath; ?>desechos.webp" alt="<?php echo $lang === 'en' ? 'Community development' : 'Desarrollo comunitario'; ?>">
                 </div>
             </div>
 
@@ -1733,15 +1783,27 @@ body {
             <div class="genera-pilar-card pilar-oceano reveal-on-scroll reveal-fade-up">
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Ocean scuba diving conservation. Replace src with your local image: <?php echo $basePath; ?>pilar-oceano.png -->
-                    <img class="genera-pilar-img" src="arrecife.webp" alt="Protección del océano">
+                    <img class="genera-pilar-img" src="<?php echo $basePath; ?>arrecife.webp" alt="<?php echo $lang === 'en' ? 'Ocean protection' : 'Protección del océano'; ?>">
                 </div>
                 <div class="genera-pilar-text-block">
                     <div class="pilar-icon-wrapper">
                         <?php render_svg('proteccion-oceano.svg', 'pilar-svg-icon', 'objetivos'); ?>
                     </div>
                     <div class="pilar-text-content">
-                        <h3 class="genera-pilar-card-title">Protección del océano</h3>
-                        <p class="genera-pilar-card-description">Fomentamos la educación y participación local en las prácticas de conservación de los ecosistemas marinos y costeros.</p>
+                        <h3 class="genera-pilar-card-title">
+                            <?php if ($lang === 'en'): ?>
+                                Ocean protection
+                            <?php else: ?>
+                                Protección del océano
+                            <?php endif; ?>
+                        </h3>
+                        <p class="genera-pilar-card-description">
+                            <?php if ($lang === 'en'): ?>
+                                We promote local education and participation in all our marine and coastal ecosystem conservation programs.
+                            <?php else: ?>
+                                Fomentamos la educación y participación local en las prácticas de conservación de los ecosistemas marinos y costeros.
+                            <?php endif; ?>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1755,7 +1817,11 @@ body {
         
         <div class="genera-objetivos-wrapper">
             <h2 class="genera-objetivos-title reveal-on-scroll reveal-fade-up">
-                Nuestras líneas de acción tienen su base en los Objetivos de Desarrollo Sostenible de la Organización de las Naciones&nbsp;Unidas.
+                <?php if ($lang === 'en'): ?>
+                    Our actions are based on the United Nations Sustainable Development Goals
+                <?php else: ?>
+                    Nuestras líneas de acción tienen su base en los Objetivos de Desarrollo Sostenible de la Organización de las Naciones&nbsp;Unidas.
+                <?php endif; ?>
             </h2>
             
             <div class="genera-objetivos-grid">
@@ -1824,26 +1890,44 @@ body {
                         <div class="pillar-circle">
                             <?php render_svg('prosperidad-economica.svg', 'svg-pillar'); ?>
                         </div>
-                        <span class="pillar-label">Prosperidad económica</span>
+                        <span class="pillar-label">
+                            <?php if ($lang === 'en'): ?>
+                                Economic prosperity
+                            <?php else: ?>
+                                Prosperidad económica
+                            <?php endif; ?>
+                        </span>
                     </div>
                     <div class="pillar-item" data-pillar="comunitario">
                         <div class="pillar-circle">
                             <?php render_svg('desarrollo-comunitario.svg', 'svg-pillar'); ?>
                         </div>
-                        <span class="pillar-label">Desarrollo comunitario</span>
+                        <span class="pillar-label">
+                            <?php if ($lang === 'en'): ?>
+                                Community development
+                            <?php else: ?>
+                                Desarrollo comunitario
+                            <?php endif; ?>
+                        </span>
                     </div>
                     <div class="pillar-item" data-pillar="oceano">
                         <div class="pillar-circle">
                             <?php render_svg('proteccion-oceano.svg', 'svg-pillar'); ?>
                         </div>
-                        <span class="pillar-label">Protección del océano</span>
+                        <span class="pillar-label">
+                            <?php if ($lang === 'en'): ?>
+                                Ocean protection
+                            <?php else: ?>
+                                Protección del océano
+                            <?php endif; ?>
+                        </span>
                     </div>
                 </div>
             </div>
 
             <!-- Footer: ODS Logo -->
             <div class="ods-footer reveal-on-scroll reveal-fade-up">
-                <img src="<?php echo $basePath; ?>objetivos/logo-ods.svg" alt="Objetivos de Desarrollo Sostenible" class="ods-footer-logo">
+                <img src="<?php echo $basePath; ?>objetivos/logo-ods.svg" alt="<?php echo $lang === 'en' ? 'Sustainable Development Goals' : 'Objetivos de Desarrollo Sostenible'; ?>" class="ods-footer-logo">
             </div>
         </div>
     </section>
@@ -2321,13 +2405,13 @@ body {
     <section class="genera-video-banner">
         <video id="generaFundacionVideo" class="genera-full-video" controls preload="metadata" poster="<?php echo $basePath; ?>preview-video.jpeg">
             <source src="<?php echo $basePath; ?>fundacion-genera.mp4" type="video/mp4">
-            Tu navegador no soporta la reproducción de video.
+            <?php echo $lang === 'en' ? 'Your browser does not support the video tag.' : 'Tu navegador no soporta la reproducción de video.'; ?>
         </video>
 
         <!-- Video Preview Overlay with Play Button -->
         <div id="generaVideoOverlay" class="genera-video-overlay" style="background-image: url('<?php echo $basePath; ?>preview-video.jpeg');">
             <div class="video-overlay-backdrop"></div>
-            <button id="generaPlayBtn" class="genera-play-btn" aria-label="Reproducir video">
+            <button id="generaPlayBtn" class="genera-play-btn" aria-label="<?php echo $lang === 'en' ? 'Play video' : 'Reproducir video'; ?>">
                 <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8 5v14l11-7z"/>
                 </svg>
@@ -2341,79 +2425,117 @@ body {
         <div class="floating-shape shape-pink" style="top: 5%; left: -60px;" data-speed="0.08"></div>
         
         <div class="genera-programas-wrapper">
-            <h2 class="genera-programas-title reveal-on-scroll reveal-fade-up">Conoce nuestros programas emblema</h2>
+            <h2 class="genera-programas-title reveal-on-scroll reveal-fade-up">
+                <?php if ($lang === 'en'): ?>
+                    Discover our flagship programs
+                <?php else: ?>
+                    Conoce nuestros programas emblema
+                <?php endif; ?>
+            </h2>
             
             <div class="programas-grid reveal-stagger">
                 <!-- Card 1: Distintivo Puertos de Cruceros -->
                 <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('programas/modal/distintivo-puertos/tarjeta.jpg');"></div>
+                        <div class="programa-card-bg" style="background-image: url('<?php echo $basePath; ?>programas/modal/distintivo-puertos/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('distintivo-puertos-cruceros.svg', '', 'programas'); ?>
                         </div>
                     </div>
-                    <p class="programa-label">Distintivo Puertos de Cruceros</p>
+                    <p class="programa-label">
+                        <?php if ($lang === 'en'): ?>
+                            Cruise Port Certification
+                        <?php else: ?>
+                            Distintivo Puertos de Cruceros
+                        <?php endif; ?>
+                    </p>
                 </div>
 
                 <!-- Card 2: Puertos y Comunidades circulares -->
                 <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('programas/modal/puertos-comunidades/tarjeta.jpg');"></div>
+                        <div class="programa-card-bg" style="background-image: url('<?php echo $basePath; ?>programas/modal/puertos-comunidades/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('puertos-comunidades-circulares.svg', '', 'programas'); ?>
                         </div>
                     </div>
-                    <p class="programa-label">Puertos y Comunidades circulares</p>
+                    <p class="programa-label">
+                        <?php if ($lang === 'en'): ?>
+                            Circular Ports & Communities
+                        <?php else: ?>
+                            Puertos y Comunidades circulares
+                        <?php endif; ?>
+                    </p>
                 </div>
 
                 <!-- Card 3: Amora -->
                 <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('programas/modal/amora/tarjeta.jpg');"></div>
+                        <div class="programa-card-bg" style="background-image: url('<?php echo $basePath; ?>programas/modal/amora/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('amora.svg', '', 'programas'); ?>
                         </div>
                     </div>
-                    <p class="programa-label">Amora</p>
+                    <p class="programa-label">
+                        Amora
+                    </p>
                 </div>
 
                 <!-- Card 4: Comité Local de Gobernanza -->
                 <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('programas/modal/comite-local/tarjeta.jpg');"></div>
+                        <div class="programa-card-bg" style="background-image: url('<?php echo $basePath; ?>programas/modal/comite-local/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('comite-gobernanza-samana.svg', '', 'programas'); ?>
                         </div>
                     </div>
-                    <p class="programa-label">Comité Local de Gobernanza para el Turismo Sostenible en Samaná</p>
+                    <p class="programa-label">
+                        <?php if ($lang === 'en'): ?>
+                            Local Governance Committee for Sustainable Tourism in Samana
+                        <?php else: ?>
+                            Comité Local de Gobernanza para el Turismo Sostenible en Samaná
+                        <?php endif; ?>
+                    </p>
                 </div>
 
                 <!-- Card 5: Centros Comunitarios -->
                 <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('programas/modal/centros-comunitarios/tarjeta.jpg');"></div>
+                        <div class="programa-card-bg" style="background-image: url('<?php echo $basePath; ?>programas/modal/centros-comunitarios/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('centros-comunitarios-wayak.svg', '', 'programas'); ?>
                         </div>
                     </div>
-                    <p class="programa-label">Centros Comunitarios</p>
+                    <p class="programa-label">
+                        <?php if ($lang === 'en'): ?>
+                            Community Centers
+                        <?php else: ?>
+                            Centros Comunitarios
+                        <?php endif; ?>
+                    </p>
                 </div>
 
                 <!-- Card 6: Tours Comunitarios -->
                 <div class="programa-card-wrapper reveal-on-scroll reveal-fade-up">
                     <div class="programa-card">
-                        <div class="programa-card-bg" style="background-image: url('programas/modal/tours/tarjeta.jpg');"></div>
+                        <div class="programa-card-bg" style="background-image: url('<?php echo $basePath; ?>programas/modal/tours/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
                         <div class="programa-svg">
                             <?php render_svg('tours-comunitarios.svg', '', 'programas'); ?>
                         </div>
                     </div>
-                    <p class="programa-label">Tours Comunitarios</p>
+                    <p class="programa-label">
+                        <?php if ($lang === 'en'): ?>
+                            Community Tours
+                        <?php else: ?>
+                            Tours Comunitarios
+                        <?php endif; ?>
+                    </p>
                 </div>
             </div>
 
@@ -2425,7 +2547,11 @@ body {
                     </div>
                 </a>
                 <p class="programas-footer-text">
-                    A través de Fundación Cancún Center, gestionamos alianzas con cada evento realizado en el Centro de Convenciones Cancún Center para impulsar proyectos comunitarios y ambientales en Quintana Roo.
+                    <?php if ($lang === 'en'): ?>
+                        Through Fundacion Cancun Center, we partner with every event held at the Cancun Center to support community and environmental projects in Quintana Roo.
+                    <?php else: ?>
+                        A través de Fundación Cancún Center, gestionamos alianzas con cada evento realizado en el Centro de Convenciones Cancún Center para impulsar proyectos comunitarios y ambientales en Quintana Roo.
+                    <?php endif; ?>
                 </p>
                 <div class="instagram-block">
                     <a href="https://www.instagram.com/fundacioncancuncenter/" target="_blank" rel="noopener noreferrer" class="instagram-link">
@@ -2434,7 +2560,13 @@ body {
                         </svg>
                         <span class="instagram-handle">@fundacioncancuncenter</span>
                     </a>
-                    <span class="programas-footer-text">Conoce más y síguenos en redes</span>
+                    <span class="programas-footer-text">
+                        <?php if ($lang === 'en'): ?>
+                            Follow and discover more!
+                        <?php else: ?>
+                            Conoce más y síguenos en redes
+                        <?php endif; ?>
+                    </span>
                 </div>
             </div>
         </div>
@@ -2462,9 +2594,19 @@ body {
                     </div>
                     <div class="modal-details">
                         <div>
-                            <h3 class="modal-details-title">Distintivo Puertos de Cruceros</h3>
+                            <h3 class="modal-details-title">
+                                <?php if ($lang === 'en'): ?>
+                                    Cruise Port Certification
+                                <?php else: ?>
+                                    Distintivo Puertos de Cruceros
+                                <?php endif; ?>
+                            </h3>
                             <p class="modal-details-text">
-                                Impulsamos la <strong>formación técnica y certificación en turismo de cruceros</strong> dirigida a personas de la comunidad local, para elevar la calidad de la atención a cruceristas, promover prácticas ambientales y generar empleo local remunerado y formal.
+                                <?php if ($lang === 'en'): ?>
+                                    We promote technical training and certification in the cruise tourism industry for members of the local community, with the goal of improving the quality of service provided to cruise passengers, promoting environmentally friendly practices, and creating paid, formal local jobs.
+                                <?php else: ?>
+                                    Impulsamos la <strong>formación técnica y certificación en turismo de cruceros</strong> dirigida a personas de la comunidad local, para elevar la calidad de la atención a cruceristas, promover prácticas ambientales y generar empleo local remunerado y formal.
+                                <?php endif; ?>
                             </p>
                         </div>
                         <div class="modal-details-logo">
@@ -2489,9 +2631,19 @@ body {
                     </div>
                     <div class="modal-details">
                         <div>
-                            <h3 class="modal-details-title">Puertos y comunidades circulares</h3>
+                            <h3 class="modal-details-title">
+                                <?php if ($lang === 'en'): ?>
+                                    Circular Ports & Communities
+                                <?php else: ?>
+                                    Puertos y comunidades circulares
+                                <?php endif; ?>
+                            </h3>
                             <p class="modal-details-text">
-                                Generamos acciones que impulsan la <strong>reducción de plásticos de un solo uso</strong> y promovemos una <strong>gestión responsable de residuos</strong> en territorios portuarios, con el objetivo de proteger el océano.
+                                <?php if ($lang === 'en'): ?>
+                                    We generate actions that promote the reduction of single-use plastics and encourage responsible waste management in port areas, with the goal of protecting the ocean.
+                                <?php else: ?>
+                                    Generamos acciones que impulsan la <strong>reducción de plásticos de un solo uso</strong> y promovemos una <strong>gestión responsable de residuos</strong> en territorios portuarios, con el objetivo de proteger el océano.
+                                <?php endif; ?>
                             </p>
                         </div>
                         <div class="modal-details-logo">
@@ -2516,9 +2668,15 @@ body {
                     </div>
                     <div class="modal-details">
                         <div>
-                            <h3 class="modal-details-title">Amora</h3>
+                            <h3 class="modal-details-title">
+                                Amora
+                            </h3>
                             <p class="modal-details-text">
-                                Promovemos el <strong>desarrollo económico, capacitación, acompañamiento y promoción</strong> de personas artesanas en lo local bajo un modelo de <strong>comercio justo y reinversión social</strong>.
+                                <?php if ($lang === 'en'): ?>
+                                    We promote economic development, training, support, and advocacy for local artisans through a model of fair trade and social reinvestment.
+                                <?php else: ?>
+                                    Promovemos el <strong>desarrollo económico, capacitación, acompañamiento y promoción</strong> de personas artesanas en lo local bajo un modelo de <strong>comercio justo y reinversión social</strong>.
+                                <?php endif; ?>
                             </p>
                         </div>
                         <div class="modal-details-logo">
@@ -2543,9 +2701,19 @@ body {
                     </div>
                     <div class="modal-details">
                         <div>
-                            <h3 class="modal-details-title">Comité Local de Gobernanza para el Turismo Sostenible en&nbsp;Samaná</h3>
+                            <h3 class="modal-details-title">
+                                <?php if ($lang === 'en'): ?>
+                                    Local Governance Committee for Sustainable Tourism in Samana
+                                <?php else: ?>
+                                    Comité Local de Gobernanza para el Turismo Sostenible en&nbsp;Samaná
+                                <?php endif; ?>
+                            </h3>
                             <p class="modal-details-text">
-                                Fortalecemos la <strong>gobernanza portuaria</strong> al articular el diálogo entre actores locales para impulsar decisiones conjuntas que favorezcan la <strong>prosperidad económica, la protección del océano y el desarrollo comunitario</strong> en Samaná.
+                                <?php if ($lang === 'en'): ?>
+                                    We strengthen port governance by promoting dialogue among local stakeholders to foster joint decisions that support economic prosperity, ocean conservation, and community development in Samana.
+                                <?php else: ?>
+                                    Fortalecemos la <strong>gobernanza portuaria</strong> al articular el diálogo entre actores locales para impulsar decisiones conjuntas que favorezcan la <strong>prosperidad económica, la protección del océano y el desarrollo comunitario</strong> en Samaná.
+                                <?php endif; ?>
                             </p>
                         </div>
                         <div class="modal-details-logo">
@@ -2570,9 +2738,19 @@ body {
                     </div>
                     <div class="modal-details">
                         <div>
-                            <h3 class="modal-details-title">Centros Comunitarios</h3>
+                            <h3 class="modal-details-title">
+                                <?php if ($lang === 'en'): ?>
+                                    Community Centers
+                                <?php else: ?>
+                                    Centros Comunitarios
+                                <?php endif; ?>
+                            </h3>
                             <p class="modal-details-text">
-                                Impulsamos el <strong>desarrollo comunitario</strong> en zonas portuarias a través de espacios de <strong>educación, cultura y emprendimiento sostenible</strong> que fortalecen el bienestar y la prosperidad compartida.
+                                <?php if ($lang === 'en'): ?>
+                                    We promote community development in port areas through educational, cultural, and sustainable entrepreneurship initiatives that enhance well-being and shared prosperity.
+                                <?php else: ?>
+                                    Impulsamos el <strong>desarrollo comunitario</strong> en zonas portuarias a través de espacios de <strong>educación, cultura y emprendimiento sostenible</strong> que fortalecen el bienestar y la prosperidad compartida.
+                                <?php endif; ?>
                             </p>
                         </div>
                         <div class="modal-details-logo">
@@ -2597,9 +2775,19 @@ body {
                     </div>
                     <div class="modal-details">
                         <div>
-                            <h3 class="modal-details-title">Tours Comunitarios</h3>
+                            <h3 class="modal-details-title">
+                                <?php if ($lang === 'en'): ?>
+                                    Community Tours
+                                <?php else: ?>
+                                    Tours Comunitarios
+                                <?php endif; ?>
+                            </h3>
                             <p class="modal-details-text">
-                                Desarrollamos e impulsamos <strong>tours comunitarios sostenibles</strong> que conectan a los visitantes con la <strong>riqueza cultural, natural e histórica local</strong>, generando beneficios económicos directos para las familias anfitrionas.
+                                <?php if ($lang === 'en'): ?>
+                                    We develop and promote sustainable community-based tours that connect visitors with the local cultural, natural, and historical heritage, generating direct economic benefits for host families.
+                                <?php else: ?>
+                                    Desarrollamos e impulsamos <strong>tours comunitarios sostenibles</strong> que conectan a los visitantes con la <strong>riqueza cultural, natural e histórica local</strong>, generando beneficios económicos directos para las familias anfitrionas.
+                                <?php endif; ?>
                             </p>
                         </div>
                         <!-- Logo is empty for Card 6 -->
@@ -2620,7 +2808,7 @@ body {
 <?php
 if (function_exists('get_template_directory_uri')) {
     // Estamos en WordPress
-    $basePath = get_template_directory_uri() . '/assets/perfiles/';
+    $basePath = get_template_directory_uri() . '/assets/sostenibilidad/';
     get_footer();
 } else {
     ?>
