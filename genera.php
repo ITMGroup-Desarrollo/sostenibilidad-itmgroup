@@ -161,7 +161,6 @@ body {
   line-height: 1.1;
   max-width: 1000px;
   margin: 0 auto;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
   letter-spacing: 0.01em;
 }
 .genera-hero-titletagline {
@@ -170,7 +169,6 @@ body {
   line-height: 1.1;
   max-width: 1000px;
   margin: 0 auto;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
   letter-spacing: 0.01em;
 }
 
