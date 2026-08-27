@@ -1662,7 +1662,7 @@ body {
             </h2>
             <p class="genera-hero-tagline">
                 <?php if ($lang === 'en'): ?>
-                    We promote sustainable development together with&nbsp;the&nbsp;community.
+                    We drive sustainable development with&nbsp;the&nbsp;community.
                 <?php else: ?>
                     Impulsamos el desarrollo sostenible junto a&nbsp;la&nbsp;comunidad.
                 <?php endif; ?>
