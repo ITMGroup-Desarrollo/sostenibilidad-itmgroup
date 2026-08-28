@@ -16,7 +16,7 @@ if (function_exists('get_template_directory_uri')) {
 $is_local = in_array($_SERVER['SERVER_NAME'], ['localhost', '127.0.0.1', '::1']);
 
 // Forzar idioma inglés en entorno local, permitiendo testing mediante ?lang= en la URL
-$lang = isset($_GET['lang']) ? $_GET['lang'] : ($is_local ? 'en' : (function_exists('Lang\\getLang') ? Lang\getLang() : 'en'));
+$lang = isset($_GET['lang']) ? $_GET['lang'] : ($is_local ? 'en' : (function_exists('Lang\\getLang') ? call_user_func('Lang\\getLang') : 'en'));
 
 // Detectar entorno para cargar cabecera
 if (function_exists('get_template_directory_uri')) {
