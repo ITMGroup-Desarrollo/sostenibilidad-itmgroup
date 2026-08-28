@@ -1773,7 +1773,7 @@ body {
                 </div>
                 <div class="genera-pilar-img-wrapper">
                     <!-- Placeholder: Woven artisan bags. Replace src with your local image: <?php echo $basePath; ?>pilar-comunidad.png -->
-                    <img class="genera-pilar-img" src="<?php echo $basePath; ?>desechos.webp" alt="<?php echo $lang === 'en' ? 'Community development' : 'Desarrollo comunitario'; ?>">
+                    <img class="genera-pilar-img" src="<?php echo $basePath; ?>comunitario.webp" alt="<?php echo $lang === 'en' ? 'Community development' : 'Desarrollo comunitario'; ?>">
                 </div>
             </div>
 
@@ -2580,9 +2580,9 @@ body {
                 <div class="modal-tab-content" data-program-index="0">
                     <div class="modal-gallery-wrapper">
                         <div class="modal-gallery">
-                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide active" style="background-image: url('<?php echo $basePath; ?>programas/modal/distintivo-puertos/1.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/distintivo-puertos/2.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/distintivo-puertos/3.webp');"></div>
                         </div>
                         <div class="modal-dots">
                             <span class="modal-dot active" data-slide-index="0"></span>
@@ -2617,9 +2617,9 @@ body {
                 <div class="modal-tab-content" data-program-index="1">
                     <div class="modal-gallery-wrapper">
                         <div class="modal-gallery">
-                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1530521954074-e64f6810b32d?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1531206715517-5c0ba140e2b8?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide active" style="background-image: url('<?php echo $basePath; ?>programas/modal/puertos-comunidades/1.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/puertos-comunidades/2.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/puertos-comunidades/3.webp');"></div>
                         </div>
                         <div class="modal-dots">
                             <span class="modal-dot active" data-slide-index="0"></span>
@@ -2654,9 +2654,9 @@ body {
                 <div class="modal-tab-content" data-program-index="2">
                     <div class="modal-gallery-wrapper">
                         <div class="modal-gallery">
-                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1509281373149-e957c6296406?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide active" style="background-image: url('<?php echo $basePath; ?>programas/modal/amora/1.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/amora/2.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/amora/3.webp');"></div>
                         </div>
                         <div class="modal-dots">
                             <span class="modal-dot active" data-slide-index="0"></span>
@@ -2687,14 +2687,16 @@ body {
                 <div class="modal-tab-content" data-program-index="3">
                     <div class="modal-gallery-wrapper">
                         <div class="modal-gallery">
-                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide active" style="background-image: url('<?php echo $basePath; ?>programas/modal/comite-local/1.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/comite-local/2.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/comite-local/3.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/comite-local/4.webp');"></div>
                         </div>
                         <div class="modal-dots">
                             <span class="modal-dot active" data-slide-index="0"></span>
                             <span class="modal-dot" data-slide-index="1"></span>
                             <span class="modal-dot" data-slide-index="2"></span>
+                            <span class="modal-dot" data-slide-index="3"></span>
                         </div>
                     </div>
                     <div class="modal-details">
@@ -2724,9 +2726,9 @@ body {
                 <div class="modal-tab-content" data-program-index="4">
                     <div class="modal-gallery-wrapper">
                         <div class="modal-gallery">
-                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide active" style="background-image: url('<?php echo $basePath; ?>programas/modal/centros-comunitarios/1.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/centros-comunitarios/2.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/centros-comunitarios/3.webp');"></div>
                         </div>
                         <div class="modal-dots">
                             <span class="modal-dot active" data-slide-index="0"></span>
@@ -2761,9 +2763,9 @@ body {
                 <div class="modal-tab-content" data-program-index="5">
                     <div class="modal-gallery-wrapper">
                         <div class="modal-gallery">
-                            <div class="modal-slide active" style="background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1534008757030-27299c4371b6?q=80&w=600&auto=format&fit=crop');"></div>
-                            <div class="modal-slide" style="background-image: url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?q=80&w=600&auto=format&fit=crop');"></div>
+                            <div class="modal-slide active" style="background-image: url('<?php echo $basePath; ?>programas/modal/tours/1.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/tours/2.webp');"></div>
+                            <div class="modal-slide" style="background-image: url('<?php echo $basePath; ?>programas/modal/tours/3.webp');"></div>
                         </div>
                         <div class="modal-dots">
                             <span class="modal-dot active" data-slide-index="0"></span>
