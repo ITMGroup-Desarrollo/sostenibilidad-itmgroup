@@ -1008,6 +1008,10 @@ body {
   margin: 0 auto;
 }
 
+.tours-boat-icon svg {
+  height: 5.95rem !important;
+}
+
 /* Make SVG path fill white by default inside card */
 .programa-svg path {
   fill: #ffffff !important;
@@ -2531,7 +2535,7 @@ body {
                     <div class="programa-card">
                         <div class="programa-card-bg" style="background-image: url('<?php echo $basePath; ?>programas/modal/tours/tarjeta.jpg');"></div>
                         <div class="programa-card-overlay"></div>
-                        <div class="programa-svg">
+                        <div class="programa-svg tours-boat-icon">
                             <?php render_svg('tours-comunitarios.svg', '', 'programas'); ?>
                         </div>
                     </div>
