@@ -41,6 +41,14 @@ if (function_exists('get_template_directory_uri')) {
 
 if (!function_exists('render_svg')) {
     function render_svg($filename, $class = '', $folder = 'objetivos') {
+        global $lang;
+        if ($lang === 'en') {
+            $en_filename = preg_replace('/\.svg$/i', '-EN.svg', $filename);
+            $en_filepath = __DIR__ . '/' . $folder . '/' . $en_filename;
+            if (file_exists($en_filepath)) {
+                $filename = $en_filename;
+            }
+        }
         $filepath = __DIR__ . '/' . $folder . '/' . $filename;
         if (file_exists($filepath)) {
             $svg = file_get_contents($filepath);
@@ -48,8 +56,8 @@ if (!function_exists('render_svg')) {
             // Scope generic classes to prevent style collisions between multiple inline SVGs
             $unique_prefix = 's' . substr(md5($folder . '/' . $filename), 0, 8) . '-';
             
-            // Rewrite all class references inside styles (.cls-1) and attributes (class="cls-1")
-            $svg = preg_replace('/(?<=[\s\'"\.])cls-([a-zA-Z0-9_-]+)\b/', $unique_prefix . 'cls-$1', $svg);
+            // Rewrite all class references inside styles (.cls-1, .st0) and attributes (class="cls-1")
+            $svg = preg_replace('/(?<=[\s\'"\.])(?:cls-[a-zA-Z0-9_-]+|st[0-9]+)\b/', $unique_prefix . '$0', $svg);
             
             if ($class) {
                 $svg = str_replace('<svg ', '<svg class="' . htmlspecialchars($class) . '" ', $svg);
@@ -1702,7 +1710,7 @@ body {
             <div class="genera-fundacion-wheel-col">
                 <div class="genera-wheel-wrapper reveal-on-scroll reveal-scale-in">
                     <?php 
-                    $govSvg = __DIR__ . '/gobernanza.svg';
+                    $govSvg = __DIR__ . '/' . ($lang === 'en' ? 'gobernanza-EN.svg' : 'gobernanza.svg');
                     if (file_exists($govSvg)) {
                         echo file_get_contents($govSvg);
                     }
@@ -1925,7 +1933,7 @@ body {
 
             <!-- Footer: ODS Logo -->
             <div class="ods-footer reveal-on-scroll reveal-fade-up">
-                <img src="<?php echo $basePath; ?>objetivos/logo-ods.svg" alt="<?php echo $lang === 'en' ? 'Sustainable Development Goals' : 'Objetivos de Desarrollo Sostenible'; ?>" class="ods-footer-logo">
+                <img src="<?php echo $basePath; ?>objetivos/<?php echo $lang === 'en' ? 'logo-ods-EN.svg' : 'logo-ods.svg'; ?>" alt="<?php echo $lang === 'en' ? 'Sustainable Development Goals' : 'Objetivos de Desarrollo Sostenible'; ?>" class="ods-footer-logo">
             </div>
         </div>
     </section>
