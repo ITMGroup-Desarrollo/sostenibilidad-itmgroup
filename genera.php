@@ -2528,7 +2528,11 @@ body {
                         </div>
                     </div>
                     <p class="programa-label">
-                        Community Centers
+                        <?php if ($lang === 'en'): ?>
+                            Community Centers
+                        <?php else: ?>
+                            Centros Comunitarios
+                        <?php endif; ?> 
                     </p>
                 </div>
 
@@ -2542,7 +2546,11 @@ body {
                         </div>
                     </div>
                     <p class="programa-label">
-                        Community Tours
+                        <?php if ($lang === 'en'): ?>
+                            Community Tours
+                        <?php else: ?>
+                            Tours Comunitarios
+                        <?php endif; ?>
                     </p>
                 </div>
             </div>
