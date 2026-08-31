@@ -1028,6 +1028,15 @@ body {
   max-width: 90%;
 }
 
+.programa-sublabel {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #556b82;
+  margin-top: 5px;
+  line-height: 1.3;
+}
+
 /* Card Hover Interactions */
 .programa-card:hover {
   transform: translateY(-6px);
@@ -2454,10 +2463,9 @@ body {
                         </div>
                     </div>
                     <p class="programa-label">
+                        Distintivo Puertos de Cruceros
                         <?php if ($lang === 'en'): ?>
-                            Cruise Port Certification
-                        <?php else: ?>
-                            Distintivo Puertos de Cruceros
+                            <span class="programa-sublabel">(Cruise Port Certification)</span>
                         <?php endif; ?>
                     </p>
                 </div>
@@ -2472,10 +2480,9 @@ body {
                         </div>
                     </div>
                     <p class="programa-label">
+                        Puertos y Comunidades Circulares
                         <?php if ($lang === 'en'): ?>
-                            Circular Ports & Communities
-                        <?php else: ?>
-                            Puertos y Comunidades circulares
+                            <span class="programa-sublabel">(Circular Ports & Communities)</span>
                         <?php endif; ?>
                     </p>
                 </div>
@@ -2504,10 +2511,9 @@ body {
                         </div>
                     </div>
                     <p class="programa-label">
+                        Comité Local de Gobernanza para el Turismo Sostenible en Samaná
                         <?php if ($lang === 'en'): ?>
-                            Local Governance Committee for Sustainable Tourism in Samana
-                        <?php else: ?>
-                            Comité Local de Gobernanza para el Turismo Sostenible en Samaná
+                            <span class="programa-sublabel">(Local Governance Committee for Sustainable Tourism in Samana)</span>
                         <?php endif; ?>
                     </p>
                 </div>
@@ -2522,11 +2528,7 @@ body {
                         </div>
                     </div>
                     <p class="programa-label">
-                        <?php if ($lang === 'en'): ?>
-                            Community Centers
-                        <?php else: ?>
-                            Centros Comunitarios
-                        <?php endif; ?>
+                        Community Centers
                     </p>
                 </div>
 
@@ -2540,11 +2542,7 @@ body {
                         </div>
                     </div>
                     <p class="programa-label">
-                        <?php if ($lang === 'en'): ?>
-                            Community Tours
-                        <?php else: ?>
-                            Tours Comunitarios
-                        <?php endif; ?>
+                        Community Tours
                     </p>
                 </div>
             </div>
